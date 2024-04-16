@@ -1,5 +1,6 @@
 {
-	"fenecon adapter settings": "Ustawienia adaptera dla fenecon",
-	"option1": "opcja 1",
-	"option2": "Opcja 2"
+    "fenecon adapter settings": "Ustawienia adaptera dla fenecon",
+    "lblIpAddress": "adres IP",
+    "lblIpAddressValidationError": "Adres IP ma nieprawidłowy format!",
+    "lblRefreshIntervall": "Odśwież interwał"
 }

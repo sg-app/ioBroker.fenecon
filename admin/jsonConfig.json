@@ -15,8 +15,8 @@
         "refreshIntervall": {
             "type": "number",
             "label": "lblRefreshIntervall",
-            "min": 120,
-            "default": 300,
+            "min": 5,
+            "default": 30,
             "help": "s",
             "sm": 12,
             "md": 4,

@@ -1,5 +1,6 @@
 {
-	"fenecon adapter settings": "fenecon的适配器设置",
-	"option1": "选项1",
-	"option2": "选项2"
+    "fenecon adapter settings": "fenecon的适配器设置",
+    "lblIpAddress": "IP地址",
+    "lblIpAddressValidationError": "IP地址格式错误！",
+    "lblRefreshIntervall": "刷新间隔"
 }
