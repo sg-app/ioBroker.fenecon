@@ -1,0 +1,87 @@
+{
+	"common": {
+		"name": "fenecon",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"uk": "Початкова версія",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "Fenecon",
+		"titleLang": {
+			"en": "Fenecon",
+			"de": "Fenecon",
+			"ru": "Фенекон",
+			"pt": "Fenecón",
+			"nl": "Fenecon",
+			"fr": "Fénécon",
+			"it": "Fenecon",
+			"es": "Fenecón",
+			"pl": "Fenekon",
+			"uk": "Фенекон",
+			"zh-cn": "芬内康"
+		},
+		"desc": {
+			"en": "OpenEMS connection to fenecon pv",
+			"de": "OpenEMS-Anbindung an fenecon pv",
+			"ru": "Подключение OpenEMS к Fenecon Pv",
+			"pt": "Conexão OpenEMS com fenecon pv",
+			"nl": "OpenEMS-verbinding met fenecon pv",
+			"fr": "Connexion OpenEMS à Fenecon PV",
+			"it": "Connessione OpenEMS a fenecon pv",
+			"es": "Conexión OpenEMS a fenecon pv",
+			"pl": "Połączenie OpenEMS z fenecon pv",
+			"uk": "Підключення OpenEMS до fenecon pv",
+			"zh-cn": "OpenEMS 与 fenecon pv 的连接"
+		},
+		"authors": ["Georg Schreiner <info@sg-app.de>"],
+		"keywords": ["ioBroker", "template", "Smart Home", "home automation"],
+		"license": "MIT",
+		"licenseInformation": {
+			"type": "free",
+			"license": "MIT"
+		},
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "fenecon.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
+		"readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
+		"loglevel": "info",
+		"tier": 3,
+		"mode": "daemon",
+		"type": "communication",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"adminUI": {
+			"config": "json"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=3.3.22"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=5.1.13"
+			}
+		]
+	},
+	"native": {
+		"ipAddress": "",
+		"refreshIntervall": 30
+	},
+	"objects": [],
+	"instanceObjects": []
+}
