@@ -1,4 +1,5 @@
 ![Logo](admin/fenecon.png)
+
 # ioBroker.fenecon
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.fenecon.svg)](https://www.npmjs.com/package/iobroker.fenecon)
@@ -15,16 +16,23 @@
 OpenEMS connection to fenecon systems
 Read all datapoints from FEMS REST/JSON interface.
 
-
 ## Changelog
+
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (Georg Schreiner) minor fix
+
 ### 0.0.2-alpha.0 (2024-04-16)
-* (Georg Schreiner) initial release
+
+-   (Georg Schreiner) initial release
 
 ## License
+
 MIT License
 
 Copyright (c) 2024 Georg Schreiner <info@sg-app.de>
