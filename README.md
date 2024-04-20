@@ -20,15 +20,19 @@ Read all datapoints from FEMS REST/JSON interface.
 
 <!--
 	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (SG-App) collect all possible data from rest interface
+
 ### 0.1.0 (2024-04-17)
 
--   (Georg Schreiner) minor fix
+-   (SG-App) minor fix
 
 ### 0.0.2-alpha.0 (2024-04-16)
 
--   (Georg Schreiner) initial release
+-   (SG-App) initial release
 
 ## License
 

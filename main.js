@@ -10,7 +10,6 @@ const utils = require("@iobroker/adapter-core");
 
 // Load your modules here, e.g.:
 const axios = require("axios");
-const dp = require("./lib/datapoints");
 
 class Fenecon extends utils.Adapter {
 	/**
@@ -63,20 +62,20 @@ class Fenecon extends utils.Adapter {
 
 	async loadData() {
 		try {
-			this.log.debug("Load data from FEMS.");
+			this.log.info("Load data from FEMS.");
 			if (!this.apiClient) {
 				this.log.error("Apiclient not instanced.");
 				return;
 			}
 
-			for (const item of dp.AllParams) {
-				const response = await this.apiClient.get(item.Datapoint);
-				this.log.debug(`response ${response.status}: ${JSON.stringify(response.data)}`);
+			const response = await this.apiClient.get(".*/.*");
+			this.log.silly(`response ${response.status}: ${JSON.stringify(response.data)}`);
 
-				if (response.status === 200) {
-					await this.updateState(item, response.data);
-				}
+			if (response.status === 200) {
+				await this.updateState(response.data);
 			}
+
+			this.log.info("REST request done and states updated.");
 		}
 		catch (err) {
 			this.log.error(`Error during loading data: ${err.message}`);
@@ -92,33 +91,49 @@ class Fenecon extends utils.Adapter {
 	}
 	/**
 	 * Updates state.
-	 * @param {object} item JSON Object
 	 * @param {object} data AXIOS Response Object Data
 	 */
-	async updateState(item, data) {
+	async updateState(data) {
 		try {
 
 			const typeTranslation = {
 				INTEGER: "number",
-				LONG: "number"
+				LONG: "number",
+				DOUBLE: "number",
+				FLOAT: "number",
+				BOOLEAN: "boolean",
+				STRING: "string"
 			};
-			this.log.silly(`ExtendObject ${item.Name} with Data: ${data.value}`);
-			await this.extendObjectAsync(item.Name,
-				{
-					common: {
-						name: item.Name,
-						desc: item.Description,
-						role: "value",
-						write: false,
-						read: true,
-						type: typeTranslation[data.type],
-						unit: data.unit,
-						states: item?.States
-					},
-					type: "state",
-					native: {}
-				});
-			await this.setStateAsync(item.Name, { val: data.value, ack: true });
+
+			for (const item of data) {
+				const address = item.address.split("/");
+				const type = typeTranslation[item.type];
+				const id = address.join(".");
+
+				if (address.length != 2)
+					continue;
+
+				if (type == "boolean") {
+					item.value = !!item.value;
+				}
+
+				this.log.silly(`ExtendObject ${id} with Data: ${item.value} and Type: ${type}`);
+				await this.extendObjectAsync(id,
+					{
+						common: {
+							name: address[1],
+							desc: item.text,
+							role: "value",
+							write: false,
+							read: true,
+							type: type,
+							unit: item.unit
+						},
+						type: "state",
+						native: {}
+					});
+				await this.setStateAsync(id, { val: item.value, ack: true });
+			}
 
 		} catch (err) {
 			this.log.error("Can't update states. " + err.message);
