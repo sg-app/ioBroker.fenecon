@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "news": {
+      "0.2.0": {
+        "en": "collect all possible data from rest interface",
+        "de": "alle möglichen daten von der restschnittstelle sammeln",
+        "ru": "собрать все возможные данные из интерфейса отдыха",
+        "pt": "recolher todos os dados possíveis da interface de descanso",
+        "nl": "verzamelen van alle mogelijke gegevens van rust interface",
+        "fr": "recueillir toutes les données possibles à partir de l'interface de repos",
+        "it": "raccogliere tutti i dati possibili dall'interfaccia di riposo",
+        "es": "recopilar todos los datos posibles desde la interfaz de reposo",
+        "pl": "zbieranie wszystkich możliwych danych z interfejsu odpoczynku",
+        "uk": "збирати всі можливі дані з інтерфейсу відпочинку",
+        "zh-cn": "从休息界面收集所有可能的数据"
+      },
       "0.1.0": {
         "en": "minor fix",
         "de": "kleinere fix",
