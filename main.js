@@ -46,12 +46,14 @@ class Fenecon extends utils.Adapter {
 			// http://x:user@<ipAddress>/rest/channel/
 			this.log.debug("Adapter successful started.");
 			this.apiClient = axios.create({
-				baseURL: `http://x:user@${this.config.ipAddress}/rest/channel/`,
+				baseURL: `http://x:owner@${this.config.ipAddress}/rest/channel/`,
 				timeout: 5000,
 				responseType: "json",
 				responseEncoding: "utf8"
 			});
 			this.log.debug("axios instance successful created.");
+
+			// this.subscribeStates("*");
 
 			await this.loadData();
 		}
@@ -62,20 +64,22 @@ class Fenecon extends utils.Adapter {
 
 	async loadData() {
 		try {
-			this.log.info("Load data from FEMS.");
+			this.log.debug("Load data from FEMS.");
 			if (!this.apiClient) {
 				this.log.error("Apiclient not instanced.");
 				return;
 			}
 
 			const response = await this.apiClient.get(".*/.*");
-			this.log.silly(`response ${response.status}: ${JSON.stringify(response.data)}`);
+			this.log.silly(`[loadData] response ${response.status}: ${JSON.stringify(response.data)}`);
 
 			if (response.status === 200) {
 				await this.updateState(response.data);
 			}
 
-			this.log.info("REST request done and states updated.");
+			await this.calculateAutarchy();
+
+			this.log.debug("REST request done and states updated.");
 		}
 		catch (err) {
 			this.log.error(`Error during loading data: ${err.message}`);
@@ -117,22 +121,20 @@ class Fenecon extends utils.Adapter {
 					item.value = !!item.value;
 				}
 
-				this.log.silly(`ExtendObject ${id} with Data: ${item.value} and Type: ${type}`);
-				await this.extendObjectAsync(id,
-					{
-						common: {
-							name: address[1],
-							desc: item.text,
-							role: "value",
-							write: false,
-							read: true,
-							type: type,
-							unit: item.unit
-						},
-						type: "state",
-						native: {}
-					});
-				await this.setStateAsync(id, { val: item.value, ack: true });
+				const stateObj = {
+					common: {
+						name: address[1],
+						desc: item.text,
+						role: "value",
+						write: item.accessMode == "WO" || item.accessMode == "RW",
+						read: item.accessMode == "RO" || item.accessMode == "RW",
+						type: type,
+						unit: item.unit
+					},
+					type: "state",
+					native: {}
+				};
+				await this.createUpdateState(id, item.value, stateObj);
 			}
 
 		} catch (err) {
@@ -161,16 +163,56 @@ class Fenecon extends utils.Adapter {
 	 * @param {string} id
 	 * @param {ioBroker.State | null | undefined} state
 	 */
-	onStateChange(id, state) {
-		if (state) {
-			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-		} else {
-			// The state was deleted
-			this.log.info(`state ${id} deleted`);
+	async onStateChange(id, state) {
+		const stateId = id.replace(`${this.namespace}.`, "");
+
+		if (state && !state.ack) {
+			this.log.debug(`[onStateChange] "${stateId}" state changed: ${JSON.stringify(state)}`);
 		}
 	}
 
+	async calculateAutarchy() {
+		const autarchyId = "_sum.Autarchy";
+		const gridAcivePower = (await this.getStateAsync(`${this.namespace}._sum.GridActivePower`))?.val;
+		const consumptionActivePower = (await this.getStateAsync(`${this.namespace}._sum.ConsumptionActivePower`))?.val;
+		let autarchy = 0;
+		if (gridAcivePower != null && consumptionActivePower != null && Number.isInteger(gridAcivePower) && Number.isInteger(consumptionActivePower)) {
+			if (+consumptionActivePower <= 0) {
+				autarchy = 100;
+			} else {
+				autarchy = Math.round(Math.max(0, Math.min(100, (1 - +gridAcivePower / +consumptionActivePower) * 100)));
+			}
+		}
+		const stateObj =
+		{
+			common: {
+				name: "Autarchy",
+				role: "value",
+				write: false,
+				read: true,
+				type: "number",
+				unit: "%"
+			},
+			type: "state",
+			native: {}
+		};
+		await this.createUpdateState(autarchyId, autarchy, stateObj);
+	}
+
+	/**
+	 * @param {string} id
+	 * @param {number | boolean | string} value
+	 * @param {any} stateObject
+	 */
+	async createUpdateState(id, value, stateObject) {
+		const state = await this.getStateAsync(id);
+		if (state == null) {
+			this.log.silly(`[createUpdateState] ExtendObject ${id} StateObject: ${JSON.stringify(stateObject)}`);
+			await this.extendObjectAsync(id, stateObject);
+		}
+		this.log.silly(`[createUpdateState] SetState ${id} Value: ${value}`);
+		await this.setStateAsync(id, { val: value, ack: true });
+	}
 }
 
 if (require.main !== module) {

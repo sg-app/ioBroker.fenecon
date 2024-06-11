@@ -20,7 +20,14 @@ Read all datapoints from FEMS REST/JSON interface.
 
 <!--
 	Placeholder for the next version (at the beginning of the line):
+	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (SG-App) set correct read write state
+-   (SG-App) calculate autarchy
+
 ### 0.2.0 (2024-04-20)
 
 -   (SG-App) collect all possible data from rest interface
