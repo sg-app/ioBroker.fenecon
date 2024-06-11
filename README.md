@@ -27,6 +27,7 @@ Read all datapoints from FEMS REST/JSON interface.
 
 -   (SG-App) set correct read write state
 -   (SG-App) calculate autarchy
+-   (SG-App) dependency updates
 
 ### 0.2.0 (2024-04-20)
 
