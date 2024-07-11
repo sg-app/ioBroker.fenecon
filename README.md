@@ -22,6 +22,11 @@ Read all datapoints from FEMS REST/JSON interface.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (SG-App) fix adapter checker warning
+
 ### 0.3.0 (2024-06-11)
 
 -   (SG-App) set correct read write state
