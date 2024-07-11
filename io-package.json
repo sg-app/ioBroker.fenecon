@@ -1,144 +1,136 @@
 {
-  "common": {
-    "name": "fenecon",
-    "version": "0.3.0",
-    "news": {
-      "0.3.0": {
-        "en": "set correct read write state\ncalculate autarchy\ndependency updates",
-        "de": "korrekter lese-schreibzustand\nberechnung der autarchie\nabhängigkeitsaktualisierung",
-        "ru": "исправить чтение состояния записи\nвычислить autarchy\nобновления зависимостей",
-        "pt": "set correct read write state\ncalcular autarchy\natualizações de dependência",
-        "nl": "correct gelezen schrijfstatus instellen\nautarchy berekenen\nafhankelijkheidsupdates",
-        "fr": "définir l'état correct de lecture\ncalculer l'autararchie\nmises à jour des dépendances",
-        "it": "set corretto scrittura stato\ncalcolare autarchy\naggiornamenti di dipendenza",
-        "es": "correcto leer estado de escritura\ncalcular autarquía\nactualizaciones de la dependencia",
-        "pl": "ustaw poprawny stan zapisu\nobliczyć autarchię\naktualizacje zależności",
-        "uk": "встановити правильно читати писати стан\nрозрахувати аутгарію\nоновлення залежності",
-        "zh-cn": "设置正确的读写状态\n计算自定义\n依赖性更新"
-      },
-      "0.2.0": {
-        "en": "collect all possible data from rest interface",
-        "de": "alle möglichen daten von der restschnittstelle sammeln",
-        "ru": "собрать все возможные данные из интерфейса отдыха",
-        "pt": "recolher todos os dados possíveis da interface de descanso",
-        "nl": "verzamelen van alle mogelijke gegevens van rust interface",
-        "fr": "recueillir toutes les données possibles à partir de l'interface de repos",
-        "it": "raccogliere tutti i dati possibili dall'interfaccia di riposo",
-        "es": "recopilar todos los datos posibles desde la interfaz de reposo",
-        "pl": "zbieranie wszystkich możliwych danych z interfejsu odpoczynku",
-        "uk": "збирати всі можливі дані з інтерфейсу відпочинку",
-        "zh-cn": "从休息界面收集所有可能的数据"
-      },
-      "0.1.0": {
-        "en": "minor fix",
-        "de": "kleinere fix",
-        "ru": "незначительные исправления",
-        "pt": "correção menor",
-        "nl": "kleine oplossing",
-        "fr": "fixe mineure",
-        "it": "correzione minore",
-        "es": "corrección menor",
-        "pl": "drobne poprawki",
-        "uk": "незначна фіксація",
-        "zh-cn": "小修补"
-      },
-      "0.0.2-alpha.0": {
-        "en": "initial release",
-        "de": "erstausstrahlung",
-        "ru": "первоначальный выпуск",
-        "pt": "lançamento inicial",
-        "nl": "eerste release",
-        "fr": "libération initiale",
-        "it": "rilascio iniziale",
-        "es": "liberación inicial",
-        "pl": "początkowe zwolnienie",
-        "uk": "початковий реліз",
-        "zh-cn": "初步释放"
-      },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "uk": "Початкова версія",
-        "zh-cn": "首次出版"
-      }
-    },
-    "titleLang": {
-      "en": "Fenecon",
-      "de": "Fenecon",
-      "ru": "Фенекон",
-      "pt": "Fenecón",
-      "nl": "Fenecon",
-      "fr": "Fénécon",
-      "it": "Fenecon",
-      "es": "Fenecón",
-      "pl": "Fenekon",
-      "uk": "Фенекон",
-      "zh-cn": "芬内康"
-    },
-    "desc": {
-      "en": "OpenEMS connection to fenecon pv",
-      "de": "OpenEMS-Anbindung an fenecon pv",
-      "ru": "Подключение OpenEMS к Fenecon Pv",
-      "pt": "Conexão OpenEMS com fenecon pv",
-      "nl": "OpenEMS-verbinding met fenecon pv",
-      "fr": "Connexion OpenEMS à Fenecon PV",
-      "it": "Connessione OpenEMS a fenecon pv",
-      "es": "Conexión OpenEMS a fenecon pv",
-      "pl": "Połączenie OpenEMS z fenecon pv",
-      "uk": "Підключення OpenEMS до fenecon pv",
-      "zh-cn": "OpenEMS 与 fenecon pv 的连接"
-    },
-    "authors": [
-      "Georg Schreiner <info@sg-app.de>"
-    ],
-    "keywords": [
-      "Fenecon",
-      "FEMS",
-      "OpenEMS",
-      "PV Anlage"
-    ],
-    "licenseInformation": {
-      "type": "free",
-      "license": "MIT"
-    },
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "fenecon.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
-    "readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
-    "loglevel": "info",
-    "tier": 3,
-    "mode": "daemon",
-    "type": "communication",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "poll",
-    "adminUI": {
-      "config": "json"
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=3.3.22"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=5.1.13"
-      }
-    ]
-  },
-  "native": {
-    "ipAddress": "",
-    "refreshIntervall": 30
-  },
-  "objects": [],
-  "instanceObjects": []
+	"common": {
+		"name": "fenecon",
+		"version": "0.3.0",
+		"news": {
+			"0.3.0": {
+				"en": "set correct read write state\ncalculate autarchy\ndependency updates",
+				"de": "korrekter lese-schreibzustand\nberechnung der autarchie\nabhängigkeitsaktualisierung",
+				"ru": "исправить чтение состояния записи\nвычислить autarchy\nобновления зависимостей",
+				"pt": "set correct read write state\ncalcular autarchy\natualizações de dependência",
+				"nl": "correct gelezen schrijfstatus instellen\nautarchy berekenen\nafhankelijkheidsupdates",
+				"fr": "définir l'état correct de lecture\ncalculer l'autararchie\nmises à jour des dépendances",
+				"it": "set corretto scrittura stato\ncalcolare autarchy\naggiornamenti di dipendenza",
+				"es": "correcto leer estado de escritura\ncalcular autarquía\nactualizaciones de la dependencia",
+				"pl": "ustaw poprawny stan zapisu\nobliczyć autarchię\naktualizacje zależności",
+				"uk": "встановити правильно читати писати стан\nрозрахувати аутгарію\nоновлення залежності",
+				"zh-cn": "设置正确的读写状态\n计算自定义\n依赖性更新"
+			},
+			"0.2.0": {
+				"en": "collect all possible data from rest interface",
+				"de": "alle möglichen daten von der restschnittstelle sammeln",
+				"ru": "собрать все возможные данные из интерфейса отдыха",
+				"pt": "recolher todos os dados possíveis da interface de descanso",
+				"nl": "verzamelen van alle mogelijke gegevens van rust interface",
+				"fr": "recueillir toutes les données possibles à partir de l'interface de repos",
+				"it": "raccogliere tutti i dati possibili dall'interfaccia di riposo",
+				"es": "recopilar todos los datos posibles desde la interfaz de reposo",
+				"pl": "zbieranie wszystkich możliwych danych z interfejsu odpoczynku",
+				"uk": "збирати всі можливі дані з інтерфейсу відпочинку",
+				"zh-cn": "从休息界面收集所有可能的数据"
+			},
+			"0.1.0": {
+				"en": "minor fix",
+				"de": "kleinere fix",
+				"ru": "незначительные исправления",
+				"pt": "correção menor",
+				"nl": "kleine oplossing",
+				"fr": "fixe mineure",
+				"it": "correzione minore",
+				"es": "corrección menor",
+				"pl": "drobne poprawki",
+				"uk": "незначна фіксація",
+				"zh-cn": "小修补"
+			},
+			"0.0.2-alpha.0": {
+				"en": "initial release",
+				"de": "erstausstrahlung",
+				"ru": "первоначальный выпуск",
+				"pt": "lançamento inicial",
+				"nl": "eerste release",
+				"fr": "libération initiale",
+				"it": "rilascio iniziale",
+				"es": "liberación inicial",
+				"pl": "początkowe zwolnienie",
+				"uk": "початковий реліз",
+				"zh-cn": "初步释放"
+			},
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"uk": "Початкова версія",
+				"zh-cn": "首次出版"
+			}
+		},
+		"titleLang": {
+			"en": "Fenecon",
+			"de": "Fenecon",
+			"ru": "Фенекон",
+			"pt": "Fenecón",
+			"nl": "Fenecon",
+			"fr": "Fénécon",
+			"it": "Fenecon",
+			"es": "Fenecón",
+			"pl": "Fenekon",
+			"uk": "Фенекон",
+			"zh-cn": "芬内康"
+		},
+		"desc": {
+			"en": "OpenEMS connection to fenecon pv",
+			"de": "OpenEMS-Anbindung an fenecon pv",
+			"ru": "Подключение OpenEMS к Fenecon Pv",
+			"pt": "Conexão OpenEMS com fenecon pv",
+			"nl": "OpenEMS-verbinding met fenecon pv",
+			"fr": "Connexion OpenEMS à Fenecon PV",
+			"it": "Connessione OpenEMS a fenecon pv",
+			"es": "Conexión OpenEMS a fenecon pv",
+			"pl": "Połączenie OpenEMS z fenecon pv",
+			"uk": "Підключення OpenEMS до fenecon pv",
+			"zh-cn": "OpenEMS 与 fenecon pv 的连接"
+		},
+		"authors": ["Georg Schreiner <info@sg-app.de>"],
+		"keywords": ["Fenecon", "FEMS", "OpenEMS", "PV Anlage"],
+		"licenseInformation": {
+			"type": "free",
+			"license": "MIT"
+		},
+		"platform": "Javascript/Node.js",
+		"icon": "fenecon.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
+		"readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
+		"loglevel": "info",
+		"tier": 3,
+		"mode": "daemon",
+		"type": "energy",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"adminUI": {
+			"config": "json"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=3.3.22"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=5.1.13"
+			}
+		]
+	},
+	"native": {
+		"ipAddress": "",
+		"refreshIntervall": 30
+	},
+	"objects": [],
+	"instanceObjects": []
 }
