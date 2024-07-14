@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "news": {
+      "0.3.2": {
+        "en": "calculate self consuming\ndependency updates",
+        "de": "selbstverbrauch berechnen\nabhängigkeitsaktualisierung",
+        "ru": "рассчитать самопотребление\nобновления зависимостей",
+        "pt": "calcular o auto consumo\natualizações de dependência",
+        "nl": "zelfconsumptie berekenen\nafhankelijkheidsupdates",
+        "fr": "calculer l'autoconsommation\nmises à jour des dépendances",
+        "it": "calcolare il consumo di auto\naggiornamenti di dipendenza",
+        "es": "calcular autoconsumo\nactualizaciones de la dependencia",
+        "pl": "obliczenie samokonsumpcji\naktualizacje zależności",
+        "uk": "розрахувати себе\nоновлення залежності",
+        "zh-cn": "计算自耗\n依赖性更新"
+      },
       "0.3.1": {
         "en": "fix adapter checker warning",
         "de": "fix adapter checker warnung",

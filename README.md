@@ -22,8 +22,7 @@ Read all datapoints from FEMS REST/JSON interface.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.3.2 (2024-07-14)
 
 -   (SG-App) calculate self consuming
 -   (SG-App) dependency updates
