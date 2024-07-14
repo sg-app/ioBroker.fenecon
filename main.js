@@ -78,6 +78,7 @@ class Fenecon extends utils.Adapter {
 			}
 
 			await this.calculateAutarchy();
+			await this.calculateSelfConsumption();
 
 			this.log.debug("REST request done and states updated.");
 		}
@@ -199,6 +200,41 @@ class Fenecon extends utils.Adapter {
 		await this.createUpdateState(autarchyId, autarchy, stateObj);
 	}
 
+	async calculateSelfConsumption() {
+		const selfConsumptionyId = "_sum.SelfConsumption";
+		let sellToGrid = (await this.getStateAsync(`${this.namespace}._sum.GridActivePower`))?.val;
+		const productionActivePower = (await this.getStateAsync(`${this.namespace}._sum.ProductionActivePower`))?.val;
+
+		let selfConsumption = 0;
+
+		if (sellToGrid != null && productionActivePower != null && Number.isInteger(sellToGrid) && Number.isInteger(productionActivePower)) {
+			if (+sellToGrid <= 0)
+				sellToGrid = +sellToGrid * -1
+			if (+productionActivePower > 0) {
+				selfConsumption = (1 - (+sellToGrid / +productionActivePower)) * 100;
+				// At least 0 %
+				selfConsumption = Math.max(selfConsumption, 0);
+
+				// At most 100 %
+				selfConsumption = Math.min(selfConsumption, 100);
+				selfConsumption = Math.floor(selfConsumption);
+			}
+		}
+		const stateObj =
+		{
+			common: {
+				name: "SelfConsumption",
+				role: "value",
+				write: false,
+				read: true,
+				type: "number",
+				unit: "%"
+			},
+			type: "state",
+			native: {}
+		};
+		await this.createUpdateState(selfConsumptionyId, selfConsumption, stateObj);
+	}
 	/**
 	 * @param {string} id
 	 * @param {number | boolean | string} value
