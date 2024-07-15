@@ -3,24 +3,25 @@
 	"type": "panel",
 	"items": {
 		"ipAddress": {
-            "type": "text",
-            "label": "lblIpAddress",
-            "sm": 12,
-            "md": 8,
-            "lg": 4,
-            "validatorNoSaveOnError": true,
-            "validatorErrorText": "lblIpAddressValidationError",
-            "validator": "/^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$/.test(data.ipAddress)"
-        },
-        "refreshIntervall": {
-            "type": "number",
-            "label": "lblRefreshIntervall",
-            "min": 5,
-            "default": 30,
-            "help": "s",
-            "sm": 12,
-            "md": 4,
-            "lg": 2
-        }
+			"type": "text",
+			"label": "lblIpAddress",
+			"sm": 12,
+			"md": 8,
+			"lg": 4,
+			"validatorNoSaveOnError": true,
+			"validatorErrorText": "lblIpAddressValidationError",
+			"validator": "/^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$/.test(data.ipAddress)"
+		},
+		"refreshIntervall": {
+			"type": "number",
+			"label": "lblRefreshIntervall",
+			"min": 5,
+			"default": 30,
+			"max": 3600,
+			"help": "s",
+			"sm": 12,
+			"md": 4,
+			"lg": 2
+		}
 	}
 }

@@ -11,10 +11,24 @@
 
 **Tests:** ![Test and Release](https://github.com/sg-app/ioBroker.fenecon/workflows/Test%20and%20Release/badge.svg)
 
-## fenecon adapter for ioBroker
+## Fenecon
 
-OpenEMS connection to fenecon systems
-Read all datapoints from FEMS REST/JSON interface.
+[Fenecon](https://fenecon.de) is a German manufacturer of PV inverters and Energy storage systems. The energy management system (FEMS) usesd is based on the [openEMS](https://github.com/OpenEMS/openems) software.
+Fenecon is a contributor of openEMS.
+
+## Adapter
+
+This adapter connects to the FEMS system and retrieves all availalbe data via the REST/JSON interface.
+In addition, useful calculations are carried out.
+
+## Configuration
+
+In order to establish a connection, the IP address of the FEMS central unit is required. the update interval can also be adjusted.
+![fenecon configuration](img/configpage.png)
+
+## States
+
+States are generated automatically whenn the adapter starts. If additional states are made available through an update of the FEMS sofware, warning messages appier in the log file. Then please restart the adapter and the new sates will be created.
 
 ## Changelog
 
@@ -22,6 +36,11 @@ Read all datapoints from FEMS REST/JSON interface.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (SG-App) refactor for latest repo
+
 ### 0.3.2 (2024-07-14)
 
 -   (SG-App) calculate self consuming

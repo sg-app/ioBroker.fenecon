@@ -10,9 +10,12 @@
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "template",
-    "Smart Home",
-    "home automation"
+    "fenecon",
+    "openems",
+    "FEMS",
+    "PV inverter",
+    "Energy storage system",
+    "Energy management system"
   ],
   "repository": {
     "type": "git",

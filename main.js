@@ -11,6 +11,8 @@ const utils = require("@iobroker/adapter-core");
 // Load your modules here, e.g.:
 const axios = require("axios");
 
+let isInit;
+
 class Fenecon extends utils.Adapter {
 	/**
 	 * @param {Partial<utils.AdapterOptions>} [options={}]
@@ -20,8 +22,8 @@ class Fenecon extends utils.Adapter {
 			...options,
 			name: "fenecon",
 		});
+
 		this.on("ready", this.onReady.bind(this));
-		this.on("stateChange", this.onStateChange.bind(this));
 		this.on("unload", this.onUnload.bind(this));
 	}
 
@@ -43,6 +45,14 @@ class Fenecon extends utils.Adapter {
 				this.log.error(`IP address has wrong format - please check configuration of ${this.namespace}`);
 				return;
 			}
+
+			if (this.config.refreshIntervall < 5 || this.config.refreshIntervall > 3600) {
+				this.log.error(`Refresh interval only allows a range from 5s to 3600s - please check configuration of ${this.namespace}`);
+				return;
+			}
+
+			isInit = true;
+
 			// http://x:user@<ipAddress>/rest/channel/
 			this.log.debug("Adapter successful started.");
 			this.apiClient = axios.create({
@@ -58,7 +68,7 @@ class Fenecon extends utils.Adapter {
 			await this.loadData();
 		}
 		catch (err) {
-			this.log.error(`Error during startup wiht message: ${err.message}`);
+			this.log.error(`Error during startup with message: ${err.message}`);
 		}
 	}
 
@@ -75,11 +85,10 @@ class Fenecon extends utils.Adapter {
 
 			if (response.status === 200) {
 				await this.updateState(response.data);
+				await this.calculateAutarchy();
+				await this.calculateSelfConsumption();
 			}
-
-			await this.calculateAutarchy();
-			await this.calculateSelfConsumption();
-
+			isInit = false;
 			this.log.debug("REST request done and states updated.");
 		}
 		catch (err) {
@@ -87,62 +96,107 @@ class Fenecon extends utils.Adapter {
 		}
 		finally {
 			// Restart request load Data!
-			this.timer = setTimeout(async () => {
+			this.timer = this.setTimeout(async () => {
 				this.log.debug("Start next request.");
 				this.timer = null;
 				await this.loadData();
 			}, this.config.refreshIntervall * 1000);
 		}
 	}
+
 	/**
 	 * Updates state.
 	 * @param {object} data AXIOS Response Object Data
 	 */
 	async updateState(data) {
 		try {
-
-			const typeTranslation = {
-				INTEGER: "number",
-				LONG: "number",
-				DOUBLE: "number",
-				FLOAT: "number",
-				BOOLEAN: "boolean",
-				STRING: "string"
-			};
-
 			for (const item of data) {
 				const address = item.address.split("/");
-				const type = typeTranslation[item.type];
 				const id = address.join(".");
+				const allowedId = this.name2id(id);
 
 				if (address.length != 2)
 					continue;
 
-				if (type == "boolean") {
+				if (this.typeTranslation(item.type) == "boolean")
 					item.value = !!item.value;
-				}
 
-				const stateObj = {
+				if (isInit == true) {
+					this.log.debug("[updateState] Initialization " + JSON.stringify(item));
+					await this.createUpdateState(item);
+				} else {
+					this.log.debug("[updateState] setState " + JSON.stringify(item));
+					await this.setState(allowedId, { val: item.value, ack: true });
+				}
+			}
+		} catch (err) {
+			this.log.error("[updateState] Exception. " + err.message);
+		}
+	}
+
+	/**
+	 * @param {any} item
+	 */
+	async createUpdateState(item) {
+		const address = item.address.split("/");
+		const channelName = address[0];
+		const stateName = address[1];
+		const id = address.join(".");
+
+		this.log.debug(`[createUpdateState] Channel ${channelName} Get object and check exists.`);
+		const object = await this.getObjectAsync(channelName);
+		if (object == null) {
+			this.log.debug(`[createUpdateState] Channel ${channelName} not exists. Extend Object.`);
+			await this.extendObject(channelName,
+				{
+					_id: channelName,
+					type: "channel",
 					common: {
-						name: address[1],
+						name: channelName
+					},
+					native: {}
+				});
+		}
+
+		this.log.debug(`[createUpdateState] StateId ${id} Get state and check exists.`);
+		const state = await this.getObjectAsync(id);
+		if (state == null) {
+			this.log.debug(`[createUpdateState] StateId ${id} not exists. Extend state.`);
+			await this.extendObject(id,
+				{
+					common: {
+						name: stateName,
 						desc: item.text,
-						role: "value",
-						write: item.accessMode == "WO" || item.accessMode == "RW",
+						role: "state",
+						// write: item.accessMode == "WO" || item.accessMode == "RW",
+						write: false,
 						read: item.accessMode == "RO" || item.accessMode == "RW",
-						type: type,
+						type: this.typeTranslation(item.type),
 						unit: item.unit
 					},
 					type: "state",
 					native: {}
-				};
-				await this.createUpdateState(id, item.value, stateObj);
-			}
-
-		} catch (err) {
-			this.log.error("Can't update states. " + err.message);
+				});
 		}
+		this.log.debug(`[createUpdateState] StateId ${id} setState.`);
+		await this.setState(id, { val: item.value, ack: true });
 	}
 
+	name2id(pName) {
+		return (pName || '').replace(this.FORBIDDEN_CHARS, '_');
+	}
+
+	typeTranslation(inType) {
+		const types = {
+			INTEGER: "number",
+			LONG: "number",
+			DOUBLE: "number",
+			FLOAT: "number",
+			BOOLEAN: "boolean",
+			STRING: "string"
+		};
+		return types[inType];
+	}
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
 	 * @param {() => void} callback
@@ -150,7 +204,7 @@ class Fenecon extends utils.Adapter {
 	onUnload(callback) {
 		try {
 			if (this.timer) {
-				clearTimeout(this.timer);
+				this.clearTimeout(this.timer);
 				this.timer = null;
 			}
 			callback();
@@ -159,51 +213,28 @@ class Fenecon extends utils.Adapter {
 		}
 	}
 
-	/**
-	 * Is called if a subscribed state changes
-	 * @param {string} id
-	 * @param {ioBroker.State | null | undefined} state
-	 */
-	async onStateChange(id, state) {
-		const stateId = id.replace(`${this.namespace}.`, "");
-
-		if (state && !state.ack) {
-			this.log.debug(`[onStateChange] "${stateId}" state changed: ${JSON.stringify(state)}`);
-		}
-	}
-
 	async calculateAutarchy() {
 		const autarchyId = "_sum.Autarchy";
-		const gridAcivePower = (await this.getStateAsync(`${this.namespace}._sum.GridActivePower`))?.val;
-		const consumptionActivePower = (await this.getStateAsync(`${this.namespace}._sum.ConsumptionActivePower`))?.val;
+		const gridAcivePower = (await this.getStateAsync("_sum.GridActivePower"))?.val;
+		const consumptionActivePower = (await this.getStateAsync("_sum.ConsumptionActivePower"))?.val;
 		let autarchy = 0;
 		if (gridAcivePower != null && consumptionActivePower != null && Number.isInteger(gridAcivePower) && Number.isInteger(consumptionActivePower)) {
-			if (+consumptionActivePower <= 0) {
+			if (+consumptionActivePower <= 0)
 				autarchy = 100;
-			} else {
+			else
 				autarchy = Math.round(Math.max(0, Math.min(100, (1 - +gridAcivePower / +consumptionActivePower) * 100)));
-			}
+
 		}
-		const stateObj =
-		{
-			common: {
-				name: "Autarchy",
-				role: "value",
-				write: false,
-				read: true,
-				type: "number",
-				unit: "%"
-			},
-			type: "state",
-			native: {}
-		};
-		await this.createUpdateState(autarchyId, autarchy, stateObj);
+		if (isInit == true)
+			await this.createUpdateState({ address: "_sum/Autarchy", type: "INTEGER", accessMode: "RO", text: "Autarchy", unit: "%", value: autarchy });
+		else
+			await this.setState(autarchyId, { val: autarchy, ack: true });
 	}
 
 	async calculateSelfConsumption() {
 		const selfConsumptionyId = "_sum.SelfConsumption";
-		let sellToGrid = (await this.getStateAsync(`${this.namespace}._sum.GridActivePower`))?.val;
-		const productionActivePower = (await this.getStateAsync(`${this.namespace}._sum.ProductionActivePower`))?.val;
+		let sellToGrid = (await this.getStateAsync("_sum.GridActivePower"))?.val;
+		const productionActivePower = (await this.getStateAsync("_sum.ProductionActivePower"))?.val;
 
 		let selfConsumption = 0;
 
@@ -220,34 +251,10 @@ class Fenecon extends utils.Adapter {
 				selfConsumption = Math.floor(selfConsumption);
 			}
 		}
-		const stateObj =
-		{
-			common: {
-				name: "SelfConsumption",
-				role: "value",
-				write: false,
-				read: true,
-				type: "number",
-				unit: "%"
-			},
-			type: "state",
-			native: {}
-		};
-		await this.createUpdateState(selfConsumptionyId, selfConsumption, stateObj);
-	}
-	/**
-	 * @param {string} id
-	 * @param {number | boolean | string} value
-	 * @param {any} stateObject
-	 */
-	async createUpdateState(id, value, stateObject) {
-		const state = await this.getStateAsync(id);
-		if (state == null) {
-			this.log.silly(`[createUpdateState] ExtendObject ${id} StateObject: ${JSON.stringify(stateObject)}`);
-			await this.extendObjectAsync(id, stateObject);
-		}
-		this.log.silly(`[createUpdateState] SetState ${id} Value: ${value}`);
-		await this.setStateAsync(id, { val: value, ack: true });
+		if (isInit == true)
+			await this.createUpdateState({ address: "_sum/SelfConsumption", type: "INTEGER", accessMode: "RO", text: "SelfConsumption", unit: "%", value: selfConsumption });
+		else
+			await this.setState(selfConsumptionyId, { val: selfConsumption, ack: true });
 	}
 }
 
