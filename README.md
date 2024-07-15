@@ -36,8 +36,7 @@ States are generated automatically whenn the adapter starts. If additional state
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.4.0 (2024-07-15)
 
 -   (SG-App) refactor for latest repo
 
