@@ -139,47 +139,40 @@ class Fenecon extends utils.Adapter {
 	 */
 	async createUpdateState(item) {
 		const address = item.address.split("/");
-		const channelName = address[0];
-		const stateName = address[1];
+		const channelName = this.name2id(address[0]);
+		const stateName = this.name2id(address[1]);
 		const id = address.join(".");
+		const allowedId = this.name2id(id);
 
-		this.log.debug(`[createUpdateState] Channel ${channelName} Get object and check exists.`);
-		const object = await this.getObjectAsync(channelName);
-		if (object == null) {
-			this.log.debug(`[createUpdateState] Channel ${channelName} not exists. Extend Object.`);
-			await this.extendObject(channelName,
-				{
-					_id: channelName,
-					type: "channel",
-					common: {
-						name: channelName
-					},
-					native: {}
-				});
-		}
+		this.log.debug(`[createUpdateState] Channel ${channelName} not exists. Extend Object.`);
+		await this.extendObject(channelName,
+			{
+				_id: channelName,
+				type: "channel",
+				common: {
+					name: channelName
+				},
+				native: {}
+			});
 
-		this.log.debug(`[createUpdateState] StateId ${id} Get state and check exists.`);
-		const state = await this.getObjectAsync(id);
-		if (state == null) {
-			this.log.debug(`[createUpdateState] StateId ${id} not exists. Extend state.`);
-			await this.extendObject(id,
-				{
-					common: {
-						name: stateName,
-						desc: item.text,
-						role: "state",
-						// write: item.accessMode == "WO" || item.accessMode == "RW",
-						write: false,
-						read: item.accessMode == "RO" || item.accessMode == "RW",
-						type: this.typeTranslation(item.type),
-						unit: item.unit
-					},
-					type: "state",
-					native: {}
-				});
-		}
-		this.log.debug(`[createUpdateState] StateId ${id} setState.`);
-		await this.setState(id, { val: item.value, ack: true });
+		this.log.debug(`[createUpdateState] StateId ${allowedId} not exists. Extend state.`);
+		await this.extendObject(allowedId,
+			{
+				common: {
+					name: stateName,
+					desc: item.text,
+					role: "state",
+					// write: item.accessMode == "WO" || item.accessMode == "RW",
+					write: false,
+					read: item.accessMode == "RO" || item.accessMode == "RW",
+					type: this.typeTranslation(item.type),
+					unit: item.unit
+				},
+				type: "state",
+				native: {}
+			});
+		this.log.debug(`[createUpdateState] StateId ${allowedId} setState.`);
+		await this.setState(allowedId, { val: item.value, ack: true });
 	}
 
 	name2id(pName) {

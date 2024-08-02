@@ -36,6 +36,14 @@ States are generated automatically whenn the adapter starts. If additional state
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (SG-App) refactor for latest repo
+-   (SG-App) remove getObject calls on init
+-   (SG-App) filter object ids if needed
+-   (SG-App) check allowed length of address for channel and id creation
+
 ### 0.4.0 (2024-07-15)
 
 -   (SG-App) refactor for latest repo
