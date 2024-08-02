@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "news": {
+      "0.5.0": {
+        "en": "set correct role states",
+        "de": "korrekte rollenzustände einstellen",
+        "ru": "правильность",
+        "pt": "definir estados de papel corretos",
+        "nl": "juiste rolstaten instellen",
+        "fr": "définir les états de rôle corrects",
+        "it": "impostare gli stati di ruolo corretti",
+        "es": "establecer el papel correcto",
+        "pl": "ustalenie prawidłowej roli państw",
+        "uk": "встановити правильну роль держави",
+        "zh-cn": "设定正确的角色状态"
+      },
       "0.4.2": {
         "en": "fix channel creation only one time on init",
         "de": "fix kanal schöpfung nur ein mal auf init",
@@ -80,19 +93,6 @@
         "pl": "ustaw poprawny stan zapisu\nobliczyć autarchię\naktualizacje zależności",
         "uk": "встановити правильно читати писати стан\nрозрахувати аутгарію\nоновлення залежності",
         "zh-cn": "设置正确的读写状态\n计算自定义\n依赖性更新"
-      },
-      "0.2.0": {
-        "en": "collect all possible data from rest interface",
-        "de": "alle möglichen daten von der restschnittstelle sammeln",
-        "ru": "собрать все возможные данные из интерфейса отдыха",
-        "pt": "recolher todos os dados possíveis da interface de descanso",
-        "nl": "verzamelen van alle mogelijke gegevens van rust interface",
-        "fr": "recueillir toutes les données possibles à partir de l'interface de repos",
-        "it": "raccogliere tutti i dati possibili dall'interfaccia di riposo",
-        "es": "recopilar todos los datos posibles desde la interfaz de reposo",
-        "pl": "zbieranie wszystkich możliwych danych z interfejsu odpoczynku",
-        "uk": "збирати всі можливі дані з інтерфейсу відпочинку",
-        "zh-cn": "从休息界面收集所有可能的数据"
       }
     },
     "titleLang": {

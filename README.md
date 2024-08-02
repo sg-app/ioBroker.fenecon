@@ -36,8 +36,7 @@ States are generated automatically whenn the adapter starts. If additional state
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.5.0 (2024-08-02)
 
 -   (SG-App) set correct role states
 
