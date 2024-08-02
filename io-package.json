@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "news": {
+      "0.4.1": {
+        "en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
+        "de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
+        "ru": "рефактор для последней репо\nудалить Object calls onit\nids объекта фильтра при необходимости\nпроверка разрешенной длины адреса для создания канала и id",
+        "pt": "refator para o último repo\nremover get O objeto chama a init\nfiltrar ids de objeto se necessário\nverificar o comprimento permitido do endereço para a criação de canal e id",
+        "nl": "refactor voor de laatste repo\nverwijderen get Object roept init aan\nfilterobject-id's indien nodig\nde toegestane lengte van het adres controleren voor kanaal- en id-aanmaak",
+        "fr": "refactor pour la dernière repo\nenlever obtenir L'objet appelle init\nids d'objet de filtre si nécessaire\nvérifier la longueur d'adresse autorisée pour la création de canal et d'id",
+        "it": "refactor per ultima repo\nrimuovere Oggetto chiama init\nfiltro oggetti ids se necessario\ncontrollare la lunghezza di indirizzo consentita per la creazione di canale e id",
+        "es": "refactor para el último repo\nretirar El objeto llama a la entrada\nfiltro objeto ids si es necesario\ncheck permitido longitud de dirección para canal y creación de id",
+        "pl": "współczynnik dla najnowszego repo\nusunąć Obiekt wywołuje init\nids obiektu filtrowania w razie potrzeby\nsprawdź dozwoloną długość adresu dla tworzenia kanału i identyfikatora",
+        "uk": "рефактор для останнього репо\nвидалити Об'єктні дзвінки на init\nфільтр об'єкта кришки, якщо потрібно\nперевірити допустиму довжину адреси для каналу і створення id",
+        "zh-cn": "最近重播的重构\n删除 对象调用init\n需要时过滤对象编号\n检查频道和 id 创建的允许地址长度"
+      },
       "0.4.0": {
         "en": "refactor for latest repo",
         "de": "refactor für neueste repo",
@@ -80,19 +93,6 @@
         "pl": "drobne poprawki",
         "uk": "незначна фіксація",
         "zh-cn": "小修补"
-      },
-      "0.0.2-alpha.0": {
-        "en": "initial release",
-        "de": "erstausstrahlung",
-        "ru": "первоначальный выпуск",
-        "pt": "lançamento inicial",
-        "nl": "eerste release",
-        "fr": "libération initiale",
-        "it": "rilascio iniziale",
-        "es": "liberación inicial",
-        "pl": "początkowe zwolnienie",
-        "uk": "початковий реліз",
-        "zh-cn": "初步释放"
       }
     },
     "titleLang": {
