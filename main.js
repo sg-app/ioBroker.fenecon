@@ -10,6 +10,7 @@ const utils = require("@iobroker/adapter-core");
 
 // Load your modules here, e.g.:
 const axios = require("axios");
+const States = require("./lib/states")
 
 let isInit;
 let createdChannel;
@@ -162,12 +163,13 @@ class Fenecon extends utils.Adapter {
 		}
 
 		this.log.debug(`[createUpdateState] StateId ${allowedId} not exists. Extend state.`);
+		let state = States.find(f => f.address === item.address);
 		await this.extendObject(allowedId,
 			{
 				common: {
 					name: stateName,
 					desc: item.text,
-					role: "state",
+					role: state?.role ?? "state",
 					// write: item.accessMode == "WO" || item.accessMode == "RW",
 					write: false,
 					read: item.accessMode == "RO" || item.accessMode == "RW",
