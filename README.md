@@ -36,6 +36,11 @@ States are generated automatically whenn the adapter starts. If additional state
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+-   (SG-App) fix channel creation only one time on init
+
 ### 0.4.1 (2024-08-02)
 
 -   (SG-App) refactor for latest repo

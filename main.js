@@ -12,6 +12,7 @@ const utils = require("@iobroker/adapter-core");
 const axios = require("axios");
 
 let isInit;
+let createdChannel;
 
 class Fenecon extends utils.Adapter {
 	/**
@@ -52,6 +53,7 @@ class Fenecon extends utils.Adapter {
 			}
 
 			isInit = true;
+			createdChannel = [];
 
 			// http://x:user@<ipAddress>/rest/channel/
 			this.log.debug("Adapter successful started.");
@@ -144,16 +146,20 @@ class Fenecon extends utils.Adapter {
 		const id = address.join(".");
 		const allowedId = this.name2id(id);
 
-		this.log.debug(`[createUpdateState] Channel ${channelName} not exists. Extend Object.`);
-		await this.extendObject(channelName,
-			{
-				_id: channelName,
-				type: "channel",
-				common: {
-					name: channelName
-				},
-				native: {}
-			});
+
+		if (createdChannel.indexOf(channelName) == -1) {
+			this.log.debug(`[createUpdateState] Channel ${channelName} not exists. Extend Object.`);
+			await this.extendObject(channelName,
+				{
+					_id: channelName,
+					type: "channel",
+					common: {
+						name: channelName
+					},
+					native: {}
+				});
+			createdChannel.push(channelName);
+		}
 
 		this.log.debug(`[createUpdateState] StateId ${allowedId} not exists. Extend state.`);
 		await this.extendObject(allowedId,
