@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "news": {
+      "0.4.2": {
+        "en": "fix channel creation only one time on init",
+        "de": "fix kanal schöpfung nur ein mal auf init",
+        "ru": "зафиксировать создание канала только один раз",
+        "pt": "corrigir criação de canal apenas uma vez no init",
+        "nl": "fix kanaal aanmaak slechts één keer op init",
+        "fr": "fixer la création de canal une seule fois sur init",
+        "it": "correzione canale creazione solo una volta su init",
+        "es": "fijar la creación del canal sólo una vez en el init",
+        "pl": "naprawić tworzenie kanału tylko jeden raz na init",
+        "uk": "фіксувати створення каналів тільки один раз на init",
+        "zh-cn": "固定频道创建仅一次"
+      },
       "0.4.1": {
         "en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
         "de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
@@ -80,19 +93,6 @@
         "pl": "zbieranie wszystkich możliwych danych z interfejsu odpoczynku",
         "uk": "збирати всі можливі дані з інтерфейсу відпочинку",
         "zh-cn": "从休息界面收集所有可能的数据"
-      },
-      "0.1.0": {
-        "en": "minor fix",
-        "de": "kleinere fix",
-        "ru": "незначительные исправления",
-        "pt": "correção menor",
-        "nl": "kleine oplossing",
-        "fr": "fixe mineure",
-        "it": "correzione minore",
-        "es": "corrección menor",
-        "pl": "drobne poprawki",
-        "uk": "незначна фіксація",
-        "zh-cn": "小修补"
       }
     },
     "titleLang": {
