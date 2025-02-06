@@ -1,6 +1,11 @@
 {
-    "fenecon adapter settings": "Adapter settings for fenecon",
-    "lblIpAddress": "IP address",
-    "lblIpAddressValidationError": "IP address has wrong format!",
-    "lblRefreshIntervall": "Refresh intervall"
+	"fenecon adapter settings": "Adapter settings for fenecon",
+	"lblIpAddress": "IP address",
+	"lblIpAddressValidationError": "IP address has wrong format!",
+	"lblRefreshIntervall": "Refresh intervall",
+	"lblEnpointsTable": "Endpoints",
+	"lblComponentId": "Component ID",
+	"lblChannelId": "Channel ID",
+	"lblUseCustomEndpoints": "Use user defined endpoints",
+	"lblUseCustomEndpointsDescription": "If you use custom endpoints, you can specify the endpoints for communication with the Fenecon server.\r\nThis involves configuring the component and the channel. For example, all channels from a component can be retrieved by specifying the channel with the wildcard character '.*'."
 }

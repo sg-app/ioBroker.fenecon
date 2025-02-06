@@ -2,5 +2,10 @@
     "fenecon adapter settings": "Adaptereinstellungen für fenecon",
     "lblIpAddress": "IP Addresse",
     "lblIpAddressValidationError": "IP-Adresse hat falsches Format!",
-    "lblRefreshIntervall": "Aktualisierungsintervall"
+    "lblRefreshIntervall": "Aktualisierungsintervall",
+    "lblEnpointsTable": "Endpunkte",
+    "lblComponentId": "Komponenten ID",
+    "lblChannelId": "Kanal ID",
+    "lblUseCustomEndpoints": "Benutzerdefinierte Endpunkte verwenden",
+    "lblUseCustomEndpointsDescription": "Wenn Sie benutzerdefinierte Endpunkte verwenden, können Sie die Endpunkte für die Kommunikation mit dem Fenecon-Server festlegen.\r\nDabei wird die Komponente und der Kanal konfiguriert. Es können z.B. alle Kanäle von einer Komponente abgerufen werden indem der Kanal mit dem Wildcardzeichen '.*' angegeben wird."
 }

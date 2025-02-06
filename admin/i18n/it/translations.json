@@ -2,5 +2,10 @@
     "fenecon adapter settings": "Impostazioni dell'adattatore per fenecon",
     "lblIpAddress": "indirizzo IP",
     "lblIpAddressValidationError": "L'indirizzo IP ha un formato errato!",
-    "lblRefreshIntervall": "Intervallo di aggiornamento"
+    "lblRefreshIntervall": "Intervallo di aggiornamento",
+    "lblEnpointsTable": "Endpoint",
+    "lblComponentId": "ID componente",
+    "lblChannelId": "ID canale",
+    "lblUseCustomEndpoints": "Utilizzare gli endpoint definiti dall'utente",
+    "lblUseCustomEndpointsDescription": "Se si utilizzano endpoint personalizzati, è possibile specificare gli endpoint per la comunicazione con il server FeneCon.\r\nCiò comporta la configurazione del componente e del canale. Ad esempio, tutti i canali di un componente possono essere recuperati specificando il canale con il carattere jolly '.*'."
 }

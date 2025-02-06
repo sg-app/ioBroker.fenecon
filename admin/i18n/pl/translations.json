@@ -2,5 +2,10 @@
     "fenecon adapter settings": "Ustawienia adaptera dla fenecon",
     "lblIpAddress": "adres IP",
     "lblIpAddressValidationError": "Adres IP ma nieprawidłowy format!",
-    "lblRefreshIntervall": "Odśwież interwał"
+    "lblRefreshIntervall": "Odśwież interwał",
+    "lblEnpointsTable": "Punkty końcowe",
+    "lblComponentId": "Identyfikator komponentu",
+    "lblChannelId": "Identyfikator kanału",
+    "lblUseCustomEndpoints": "Użyj zdefiniowanych przez użytkownika punktów końcowych",
+    "lblUseCustomEndpointsDescription": "Jeśli używasz niestandardowych punktów końcowych, możesz określić punkty końcowe do komunikacji z serwerem Fenecon.\r\nObejmuje to konfigurację komponentu i kanału. Na przykład wszystkie kanały z komponentu można odzyskać, określając kanał z znakiem dzikiego karty „.*”."
 }

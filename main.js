@@ -83,10 +83,28 @@ class Fenecon extends utils.Adapter {
 				return;
 			}
 
-			const response = await this.apiClient.get(".*/.*");
-			this.log.silly(`[loadData] response ${response.status}: ${JSON.stringify(response.data)}`);
+			/** @type {{ data: any[] }} */
+			let response = { data: [] };
+			if (!this.config.useCustomEndpoints) {
+				const apiResponse = await this.apiClient.get(".*/.*");
+				if (apiResponse.status === 200) {
+					response.data.push(...apiResponse.data);
+				}
+			} else {
+				const endpoints = this.config.endpoints;
+				for (const endpoint of endpoints) {
+					const getEndpoint = `${endpoint.componentId}/${endpoint.channelId}`;
+					const endpointResponse = await this.apiClient.get(getEndpoint);
+					this.log.silly(`[loadData] response ${endpointResponse.status} from ${endpoint}: ${JSON.stringify(endpointResponse.data)}`);
+					if (endpointResponse.status === 200) {
+						response.data.push(...endpointResponse.data);
+					}
+				}
+			}
+			// this.log.silly(`[loadData] response ${response.status}: ${JSON.stringify(response.data)}`);
+			this.log.silly(`[loadData] combined response: ${JSON.stringify(response.data)}`);
 
-			if (response.status === 200) {
+			if (response.data.length > 0) {
 				await this.updateState(response.data);
 				await this.calculateAutarchy();
 				await this.calculateSelfConsumption();
@@ -114,22 +132,28 @@ class Fenecon extends utils.Adapter {
 	async updateState(data) {
 		try {
 			for (const item of data) {
-				const address = item.address.split("/");
-				const id = address.join(".");
+				const addressParts = item.address.split("/");
+				if (addressParts.length !== 2) continue;
+
+				const id = addressParts.join(".");
 				const allowedId = this.name2id(id);
+				const type = this.typeTranslation(item.type);
 
-				if (address.length != 2)
-					continue;
-
-				if (this.typeTranslation(item.type) == "boolean")
+				if (type === "boolean") {
 					item.value = !!item.value;
+				}
 
-				if (isInit == true) {
-					this.log.debug("[updateState] Initialization " + JSON.stringify(item));
+				const logMessage = `[updateState] ${isInit ? "Initialization" : "setState"} ${JSON.stringify(item)}`;
+				this.log.debug(logMessage);
+
+				if (isInit) {
 					await this.createUpdateState(item);
 				} else {
-					this.log.debug("[updateState] setState " + JSON.stringify(item));
-					await this.setState(allowedId, { val: item.value, ack: true });
+					await this.setState(allowedId, { val: item.value, ack: true }, (err, id) => {
+						if (err) {
+							this.log.debug(`[updateState] setStateCallback: ${id} error ${err.message}`);
+						}
+					});
 				}
 			}
 		} catch (err) {
@@ -141,44 +165,40 @@ class Fenecon extends utils.Adapter {
 	 * @param {any} item
 	 */
 	async createUpdateState(item) {
-		const address = item.address.split("/");
-		const channelName = this.name2id(address[0]);
-		const stateName = this.name2id(address[1]);
-		const id = address.join(".");
+		const [channel, state] = item.address.split("/");
+		const channelName = this.name2id(channel);
+		const stateName = this.name2id(state);
+		const id = `${channel}.${state}`;
 		const allowedId = this.name2id(id);
 
-
-		if (createdChannel.indexOf(channelName) == -1) {
+		if (!createdChannel.includes(channelName)) {
 			this.log.debug(`[createUpdateState] Channel ${channelName} not exists. Extend Object.`);
-			await this.extendObject(channelName,
-				{
-					_id: channelName,
-					type: "channel",
-					common: {
-						name: channelName
-					},
-					native: {}
-				});
+			await this.extendObject(channelName, {
+				_id: channelName,
+				type: "channel",
+				common: {
+					name: channelName
+				},
+				native: {}
+			});
 			createdChannel.push(channelName);
 		}
 
 		this.log.debug(`[createUpdateState] StateId ${allowedId} not exists. Extend state.`);
-		let state = States.find(f => f.address === item.address);
-		await this.extendObject(allowedId,
-			{
-				common: {
-					name: stateName,
-					desc: item.text,
-					role: state?.role ?? "state",
-					// write: item.accessMode == "WO" || item.accessMode == "RW",
-					write: false,
-					read: item.accessMode == "RO" || item.accessMode == "RW",
-					type: this.typeTranslation(item.type),
-					unit: item.unit
-				},
-				type: "state",
-				native: {}
-			});
+		const existingState = States.find(f => f.address === item.address);
+		await this.extendObject(allowedId, {
+			common: {
+				name: stateName,
+				desc: item.text,
+				role: existingState?.role ?? "state",
+				write: false,
+				read: item.accessMode === "RO" || item.accessMode === "RW",
+				type: this.typeTranslation(item.type),
+				unit: item.unit
+			},
+			type: "state",
+			native: {}
+		});
 		this.log.debug(`[createUpdateState] StateId ${allowedId} setState.`);
 		await this.setState(allowedId, { val: item.value, ack: true });
 	}

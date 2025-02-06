@@ -2,5 +2,10 @@
     "fenecon adapter settings": "Ajustes del adaptador para fenecon",
     "lblIpAddress": "dirección IP",
     "lblIpAddressValidationError": "¡La dirección IP tiene un formato incorrecto!",
-    "lblRefreshIntervall": "Intervalo de actualización"
+    "lblRefreshIntervall": "Intervalo de actualización",
+    "lblEnpointsTable": "Puntos finales",
+    "lblComponentId": "ID de componente",
+    "lblChannelId": "ID de canal",
+    "lblUseCustomEndpoints": "Use puntos finales definidos por el usuario",
+    "lblUseCustomEndpointsDescription": "Si usa puntos finales personalizados, puede especificar los puntos finales para la comunicación con el servidor Fenecon.\r\nEsto implica configurar el componente y el canal. Por ejemplo, todos los canales de un componente se pueden recuperar especificando el canal con el carácter comodín '.*'."
 }

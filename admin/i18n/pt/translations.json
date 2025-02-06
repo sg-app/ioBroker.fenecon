@@ -2,5 +2,10 @@
     "fenecon adapter settings": "Configurações do adaptador para fenecon",
     "lblIpAddress": "endereço de IP",
     "lblIpAddressValidationError": "O endereço IP está no formato errado!",
-    "lblRefreshIntervall": "Intervalo de atualização"
+    "lblRefreshIntervall": "Intervalo de atualização",
+    "lblEnpointsTable": "Pontos de extremidade",
+    "lblComponentId": "ID do componente",
+    "lblChannelId": "ID do canal",
+    "lblUseCustomEndpoints": "Use pontos de extremidade definidos pelo usuário",
+    "lblUseCustomEndpointsDescription": "Se você usar pontos de extremidade personalizados, poderá especificar os pontos de extremidade para comunicação com o FeneCon Server.\r\nIsso envolve a configuração do componente e do canal. Por exemplo, todos os canais de um componente podem ser recuperados especificando o canal com o caractere curinga '.*'."
 }

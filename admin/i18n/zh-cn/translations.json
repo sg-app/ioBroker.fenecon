@@ -2,5 +2,10 @@
     "fenecon adapter settings": "fenecon的适配器设置",
     "lblIpAddress": "IP地址",
     "lblIpAddressValidationError": "IP地址格式错误！",
-    "lblRefreshIntervall": "刷新间隔"
+    "lblRefreshIntervall": "刷新间隔",
+    "lblEnpointsTable": "端点",
+    "lblComponentId": "组件ID",
+    "lblChannelId": "通道ID",
+    "lblUseCustomEndpoints": "使用用户定义的端点",
+    "lblUseCustomEndpointsDescription": "如果使用自定义端点，则可以指定与Fenecon服务器通信的端点。\r\n这涉及配置组件和通道。例如，可以通过用通配符字符指定通道'。*'来检索来自组件的所有通道。"
 }

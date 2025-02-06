@@ -5,9 +5,11 @@
 		"ipAddress": {
 			"type": "text",
 			"label": "lblIpAddress",
+			"xs": 12,
 			"sm": 12,
 			"md": 8,
 			"lg": 4,
+			"xl": 4,
 			"validatorNoSaveOnError": true,
 			"validatorErrorText": "lblIpAddressValidationError",
 			"validator": "/^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$/.test(data.ipAddress)"
@@ -19,9 +21,39 @@
 			"default": 30,
 			"max": 3600,
 			"help": "s",
+			"xs": 12,
 			"sm": 12,
 			"md": 4,
-			"lg": 2
+			"lg": 2,
+			"xl": 2
+		},
+		"useCustomEndpoints": {
+			"type": "checkbox",
+			"label": "lblUseCustomEndpoints"
+		},
+		"descriptionWhenUseCusotomEndpoints": {
+			"type": "staticText",
+			"label": "lblUseCustomEndpointsDescription",
+			"hidden": "!data.useCustomEndpoints"
+		},
+		"endpoints": {
+			"type": "table",
+			"label": "lblEnpointsTable",
+			"hidden": "!data.useCustomEndpoints",
+			"compact": true,
+			"uniqueColumns": ["componentId"],
+			"items": [
+				{
+					"type": "text",
+					"attr": "componentId",
+					"label": "lblComponentId"
+				},
+				{
+					"type": "text",
+					"attr": "channelId",
+					"label": "lblChannelId"
+				}
+			]
 		}
 	}
 }

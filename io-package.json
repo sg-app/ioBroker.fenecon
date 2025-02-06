@@ -1,171 +1,190 @@
 {
-  "common": {
-    "name": "fenecon",
-    "version": "0.5.0",
-    "news": {
-      "0.5.0": {
-        "en": "set correct role states",
-        "de": "korrekte rollenzustände einstellen",
-        "ru": "правильность",
-        "pt": "definir estados de papel corretos",
-        "nl": "juiste rolstaten instellen",
-        "fr": "définir les états de rôle corrects",
-        "it": "impostare gli stati di ruolo corretti",
-        "es": "establecer el papel correcto",
-        "pl": "ustalenie prawidłowej roli państw",
-        "uk": "встановити правильну роль держави",
-        "zh-cn": "设定正确的角色状态"
-      },
-      "0.4.2": {
-        "en": "fix channel creation only one time on init",
-        "de": "fix kanal schöpfung nur ein mal auf init",
-        "ru": "зафиксировать создание канала только один раз",
-        "pt": "corrigir criação de canal apenas uma vez no init",
-        "nl": "fix kanaal aanmaak slechts één keer op init",
-        "fr": "fixer la création de canal une seule fois sur init",
-        "it": "correzione canale creazione solo una volta su init",
-        "es": "fijar la creación del canal sólo una vez en el init",
-        "pl": "naprawić tworzenie kanału tylko jeden raz na init",
-        "uk": "фіксувати створення каналів тільки один раз на init",
-        "zh-cn": "固定频道创建仅一次"
-      },
-      "0.4.1": {
-        "en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
-        "de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
-        "ru": "рефактор для последней репо\nудалить Object calls onit\nids объекта фильтра при необходимости\nпроверка разрешенной длины адреса для создания канала и id",
-        "pt": "refator para o último repo\nremover get O objeto chama a init\nfiltrar ids de objeto se necessário\nverificar o comprimento permitido do endereço para a criação de canal e id",
-        "nl": "refactor voor de laatste repo\nverwijderen get Object roept init aan\nfilterobject-id's indien nodig\nde toegestane lengte van het adres controleren voor kanaal- en id-aanmaak",
-        "fr": "refactor pour la dernière repo\nenlever obtenir L'objet appelle init\nids d'objet de filtre si nécessaire\nvérifier la longueur d'adresse autorisée pour la création de canal et d'id",
-        "it": "refactor per ultima repo\nrimuovere Oggetto chiama init\nfiltro oggetti ids se necessario\ncontrollare la lunghezza di indirizzo consentita per la creazione di canale e id",
-        "es": "refactor para el último repo\nretirar El objeto llama a la entrada\nfiltro objeto ids si es necesario\ncheck permitido longitud de dirección para canal y creación de id",
-        "pl": "współczynnik dla najnowszego repo\nusunąć Obiekt wywołuje init\nids obiektu filtrowania w razie potrzeby\nsprawdź dozwoloną długość adresu dla tworzenia kanału i identyfikatora",
-        "uk": "рефактор для останнього репо\nвидалити Об'єктні дзвінки на init\nфільтр об'єкта кришки, якщо потрібно\nперевірити допустиму довжину адреси для каналу і створення id",
-        "zh-cn": "最近重播的重构\n删除 对象调用init\n需要时过滤对象编号\n检查频道和 id 创建的允许地址长度"
-      },
-      "0.4.0": {
-        "en": "refactor for latest repo",
-        "de": "refactor für neueste repo",
-        "ru": "рефактор для последней репо",
-        "pt": "refator para o último repo",
-        "nl": "refactor voor de laatste repo",
-        "fr": "refactor pour la dernière repo",
-        "it": "refactor per ultima repo",
-        "es": "refactor para el último repo",
-        "pl": "współczynnik dla najnowszego repo",
-        "uk": "рефактор для останнього репо",
-        "zh-cn": "最近重播的重构"
-      },
-      "0.3.2": {
-        "en": "calculate self consuming\ndependency updates",
-        "de": "selbstverbrauch berechnen\nabhängigkeitsaktualisierung",
-        "ru": "рассчитать самопотребление\nобновления зависимостей",
-        "pt": "calcular o auto consumo\natualizações de dependência",
-        "nl": "zelfconsumptie berekenen\nafhankelijkheidsupdates",
-        "fr": "calculer l'autoconsommation\nmises à jour des dépendances",
-        "it": "calcolare il consumo di auto\naggiornamenti di dipendenza",
-        "es": "calcular autoconsumo\nactualizaciones de la dependencia",
-        "pl": "obliczenie samokonsumpcji\naktualizacje zależności",
-        "uk": "розрахувати себе\nоновлення залежності",
-        "zh-cn": "计算自耗\n依赖性更新"
-      },
-      "0.3.1": {
-        "en": "fix adapter checker warning",
-        "de": "fix adapter checker warnung",
-        "ru": "предупреждение адаптера",
-        "pt": "corrigir o aviso do verificador do adaptador",
-        "nl": "fix adapter controleer waarschuwing",
-        "fr": "correction de l'avertissement du vérificateur d'adaptateur",
-        "it": "correzione dell'avviso dell'adattatore",
-        "es": "aviso de comprobación del adaptador de fijación",
-        "pl": "poprawianie ostrzeżenia kontrolera adaptera",
-        "uk": "попередження перевірки адаптера",
-        "zh-cn": "固定适配器检查器警告"
-      },
-      "0.3.0": {
-        "en": "set correct read write state\ncalculate autarchy\ndependency updates",
-        "de": "korrekter lese-schreibzustand\nberechnung der autarchie\nabhängigkeitsaktualisierung",
-        "ru": "исправить чтение состояния записи\nвычислить autarchy\nобновления зависимостей",
-        "pt": "set correct read write state\ncalcular autarchy\natualizações de dependência",
-        "nl": "correct gelezen schrijfstatus instellen\nautarchy berekenen\nafhankelijkheidsupdates",
-        "fr": "définir l'état correct de lecture\ncalculer l'autararchie\nmises à jour des dépendances",
-        "it": "set corretto scrittura stato\ncalcolare autarchy\naggiornamenti di dipendenza",
-        "es": "correcto leer estado de escritura\ncalcular autarquía\nactualizaciones de la dependencia",
-        "pl": "ustaw poprawny stan zapisu\nobliczyć autarchię\naktualizacje zależności",
-        "uk": "встановити правильно читати писати стан\nрозрахувати аутгарію\nоновлення залежності",
-        "zh-cn": "设置正确的读写状态\n计算自定义\n依赖性更新"
-      }
+    "common": {
+        "name": "fenecon",
+        "version": "0.5.0",
+        "news": {
+            "0.5.0": {
+                "en": "set correct role states",
+                "de": "korrekte rollenzustände einstellen",
+                "ru": "правильность",
+                "pt": "definir estados de papel corretos",
+                "nl": "juiste rolstaten instellen",
+                "fr": "définir les états de rôle corrects",
+                "it": "impostare gli stati di ruolo corretti",
+                "es": "establecer el papel correcto",
+                "pl": "ustalenie prawidłowej roli państw",
+                "uk": "встановити правильну роль держави",
+                "zh-cn": "设定正确的角色状态"
+            },
+            "0.4.2": {
+                "en": "fix channel creation only one time on init",
+                "de": "fix kanal schöpfung nur ein mal auf init",
+                "ru": "зафиксировать создание канала только один раз",
+                "pt": "corrigir criação de canal apenas uma vez no init",
+                "nl": "fix kanaal aanmaak slechts één keer op init",
+                "fr": "fixer la création de canal une seule fois sur init",
+                "it": "correzione canale creazione solo una volta su init",
+                "es": "fijar la creación del canal sólo una vez en el init",
+                "pl": "naprawić tworzenie kanału tylko jeden raz na init",
+                "uk": "фіксувати створення каналів тільки один раз на init",
+                "zh-cn": "固定频道创建仅一次"
+            },
+            "0.4.1": {
+                "en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
+                "de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
+                "ru": "рефактор для последней репо\nудалить Object calls onit\nids объекта фильтра при необходимости\nпроверка разрешенной длины адреса для создания канала и id",
+                "pt": "refator para o último repo\nremover get O objeto chama a init\nfiltrar ids de objeto se necessário\nverificar o comprimento permitido do endereço para a criação de canal e id",
+                "nl": "refactor voor de laatste repo\nverwijderen get Object roept init aan\nfilterobject-id's indien nodig\nde toegestane lengte van het adres controleren voor kanaal- en id-aanmaak",
+                "fr": "refactor pour la dernière repo\nenlever obtenir L'objet appelle init\nids d'objet de filtre si nécessaire\nvérifier la longueur d'adresse autorisée pour la création de canal et d'id",
+                "it": "refactor per ultima repo\nrimuovere Oggetto chiama init\nfiltro oggetti ids se necessario\ncontrollare la lunghezza di indirizzo consentita per la creazione di canale e id",
+                "es": "refactor para el último repo\nretirar El objeto llama a la entrada\nfiltro objeto ids si es necesario\ncheck permitido longitud de dirección para canal y creación de id",
+                "pl": "współczynnik dla najnowszego repo\nusunąć Obiekt wywołuje init\nids obiektu filtrowania w razie potrzeby\nsprawdź dozwoloną długość adresu dla tworzenia kanału i identyfikatora",
+                "uk": "рефактор для останнього репо\nвидалити Об'єктні дзвінки на init\nфільтр об'єкта кришки, якщо потрібно\nперевірити допустиму довжину адреси для каналу і створення id",
+                "zh-cn": "最近重播的重构\n删除 对象调用init\n需要时过滤对象编号\n检查频道和 id 创建的允许地址长度"
+            },
+            "0.4.0": {
+                "en": "refactor for latest repo",
+                "de": "refactor für neueste repo",
+                "ru": "рефактор для последней репо",
+                "pt": "refator para o último repo",
+                "nl": "refactor voor de laatste repo",
+                "fr": "refactor pour la dernière repo",
+                "it": "refactor per ultima repo",
+                "es": "refactor para el último repo",
+                "pl": "współczynnik dla najnowszego repo",
+                "uk": "рефактор для останнього репо",
+                "zh-cn": "最近重播的重构"
+            },
+            "0.3.2": {
+                "en": "calculate self consuming\ndependency updates",
+                "de": "selbstverbrauch berechnen\nabhängigkeitsaktualisierung",
+                "ru": "рассчитать самопотребление\nобновления зависимостей",
+                "pt": "calcular o auto consumo\natualizações de dependência",
+                "nl": "zelfconsumptie berekenen\nafhankelijkheidsupdates",
+                "fr": "calculer l'autoconsommation\nmises à jour des dépendances",
+                "it": "calcolare il consumo di auto\naggiornamenti di dipendenza",
+                "es": "calcular autoconsumo\nactualizaciones de la dependencia",
+                "pl": "obliczenie samokonsumpcji\naktualizacje zależności",
+                "uk": "розрахувати себе\nоновлення залежності",
+                "zh-cn": "计算自耗\n依赖性更新"
+            },
+            "0.3.1": {
+                "en": "fix adapter checker warning",
+                "de": "fix adapter checker warnung",
+                "ru": "предупреждение адаптера",
+                "pt": "corrigir o aviso do verificador do adaptador",
+                "nl": "fix adapter controleer waarschuwing",
+                "fr": "correction de l'avertissement du vérificateur d'adaptateur",
+                "it": "correzione dell'avviso dell'adattatore",
+                "es": "aviso de comprobación del adaptador de fijación",
+                "pl": "poprawianie ostrzeżenia kontrolera adaptera",
+                "uk": "попередження перевірки адаптера",
+                "zh-cn": "固定适配器检查器警告"
+            },
+            "0.3.0": {
+                "en": "set correct read write state\ncalculate autarchy\ndependency updates",
+                "de": "korrekter lese-schreibzustand\nberechnung der autarchie\nabhängigkeitsaktualisierung",
+                "ru": "исправить чтение состояния записи\nвычислить autarchy\nобновления зависимостей",
+                "pt": "set correct read write state\ncalcular autarchy\natualizações de dependência",
+                "nl": "correct gelezen schrijfstatus instellen\nautarchy berekenen\nafhankelijkheidsupdates",
+                "fr": "définir l'état correct de lecture\ncalculer l'autararchie\nmises à jour des dépendances",
+                "it": "set corretto scrittura stato\ncalcolare autarchy\naggiornamenti di dipendenza",
+                "es": "correcto leer estado de escritura\ncalcular autarquía\nactualizaciones de la dependencia",
+                "pl": "ustaw poprawny stan zapisu\nobliczyć autarchię\naktualizacje zależności",
+                "uk": "встановити правильно читати писати стан\nрозрахувати аутгарію\nоновлення залежності",
+                "zh-cn": "设置正确的读写状态\n计算自定义\n依赖性更新"
+            }
+        },
+        "titleLang": {
+            "en": "Fenecon",
+            "de": "Fenecon",
+            "ru": "Фенекон",
+            "pt": "Fenecón",
+            "nl": "Fenecon",
+            "fr": "Fénécon",
+            "it": "Fenecon",
+            "es": "Fenecón",
+            "pl": "Fenekon",
+            "uk": "Фенекон",
+            "zh-cn": "芬内康"
+        },
+        "desc": {
+            "en": "OpenEMS connection to fenecon pv",
+            "de": "OpenEMS-Anbindung an fenecon pv",
+            "ru": "Подключение OpenEMS к Fenecon Pv",
+            "pt": "Conexão OpenEMS com fenecon pv",
+            "nl": "OpenEMS-verbinding met fenecon pv",
+            "fr": "Connexion OpenEMS à Fenecon PV",
+            "it": "Connessione OpenEMS a fenecon pv",
+            "es": "Conexión OpenEMS a fenecon pv",
+            "pl": "Połączenie OpenEMS z fenecon pv",
+            "uk": "Підключення OpenEMS до fenecon pv",
+            "zh-cn": "OpenEMS 与 fenecon pv 的连接"
+        },
+        "authors": [
+            "Georg Schreiner <info@sg-app.de>"
+        ],
+        "keywords": [
+            "fenecon",
+            "openems",
+            "FEMS",
+            "PV inverter",
+            "Energy storage system",
+            "Energy management system"
+        ],
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        },
+        "platform": "Javascript/Node.js",
+        "icon": "fenecon.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
+        "readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
+        "loglevel": "info",
+        "tier": 3,
+        "mode": "daemon",
+        "type": "energy",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "adminUI": {
+            "config": "json"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=5.0.19"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=6.13.16"
+            }
+        ]
     },
-    "titleLang": {
-      "en": "Fenecon",
-      "de": "Fenecon",
-      "ru": "Фенекон",
-      "pt": "Fenecón",
-      "nl": "Fenecon",
-      "fr": "Fénécon",
-      "it": "Fenecon",
-      "es": "Fenecón",
-      "pl": "Fenekon",
-      "uk": "Фенекон",
-      "zh-cn": "芬内康"
+    "native": {
+        "ipAddress": "",
+        "refreshIntervall": 30,
+        "useCustomEndpoints": false,
+        "endpoints": [
+            {
+                "componentId": "_sum",
+                "channelId": ".*"
+            },
+            {
+                "componentId": "ess0",
+                "channelId": ".*"
+            },
+            {
+                "componentId": "charger.*",
+                "channelId": ".*"
+            },
+            {
+                "componentId": "meter0",
+                "channelId": ".*"
+            }
+        ]
     },
-    "desc": {
-      "en": "OpenEMS connection to fenecon pv",
-      "de": "OpenEMS-Anbindung an fenecon pv",
-      "ru": "Подключение OpenEMS к Fenecon Pv",
-      "pt": "Conexão OpenEMS com fenecon pv",
-      "nl": "OpenEMS-verbinding met fenecon pv",
-      "fr": "Connexion OpenEMS à Fenecon PV",
-      "it": "Connessione OpenEMS a fenecon pv",
-      "es": "Conexión OpenEMS a fenecon pv",
-      "pl": "Połączenie OpenEMS z fenecon pv",
-      "uk": "Підключення OpenEMS до fenecon pv",
-      "zh-cn": "OpenEMS 与 fenecon pv 的连接"
-    },
-    "authors": [
-      "Georg Schreiner <info@sg-app.de>"
-    ],
-    "keywords": [
-      "fenecon",
-      "openems",
-      "FEMS",
-      "PV inverter",
-      "Energy storage system",
-      "Energy management system"
-    ],
-    "licenseInformation": {
-      "type": "free",
-      "license": "MIT"
-    },
-    "platform": "Javascript/Node.js",
-    "icon": "fenecon.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
-    "readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
-    "loglevel": "info",
-    "tier": 3,
-    "mode": "daemon",
-    "type": "energy",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "poll",
-    "adminUI": {
-      "config": "json"
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=5.0.19"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=6.13.16"
-      }
-    ]
-  },
-  "native": {
-    "ipAddress": "",
-    "refreshIntervall": 30
-  },
-  "objects": [],
-  "instanceObjects": []
+    "objects": [],
+    "instanceObjects": []
 }

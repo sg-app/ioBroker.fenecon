@@ -2,5 +2,10 @@
     "fenecon adapter settings": "Adapterinstellingen voor fenecon",
     "lblIpAddress": "IP adres",
     "lblIpAddressValidationError": "IP-adres heeft het verkeerde formaat!",
-    "lblRefreshIntervall": "Vernieuwingsinterval"
+    "lblRefreshIntervall": "Vernieuwingsinterval",
+    "lblEnpointsTable": "Eindpunten",
+    "lblComponentId": "Component -ID",
+    "lblChannelId": "Kanaal -ID",
+    "lblUseCustomEndpoints": "Gebruik door de gebruiker gedefinieerde eindpunten",
+    "lblUseCustomEndpointsDescription": "Als u aangepaste eindpunten gebruikt, kunt u de eindpunten opgeven voor communicatie met de Fenecon -server.\r\nDit omvat het configureren van de component en het kanaal. Alle kanalen van een component kunnen bijvoorbeeld worden opgehaald door het kanaal op te geven met het wildcard -teken '.*'."
 }
