@@ -97,7 +97,7 @@ States are generated automatically whenn the adapter starts. If a status or chan
 
 MIT License
 
-Copyright (c) 2024 Georg Schreiner <info@sg-app.de>
+Copyright (c) 2025 Georg Schreiner <info@sg-app.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
