@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "news": {
+      "0.6.1": {
+        "en": "fix missing size attributes",
+        "de": "fehlende größenattribute beheben",
+        "ru": "исправить недостающие атрибуты",
+        "pt": "corrigir atributos de tamanho ausentes",
+        "nl": "ontbrekende grootte-attributen herstellen",
+        "fr": "correction des attributs de taille manquants",
+        "it": "correggere gli attributi delle dimensioni mancanti",
+        "es": "fijar atributos de tamaño perdido",
+        "pl": "naprawić brakujące atrybuty wielkości",
+        "uk": "виправити атрибути відсутніх розмірів",
+        "zh-cn": "修补缺失的大小属性"
+      },
       "0.6.0": {
         "en": "dependency updates\nadded component and channel selection\nfix warning after FEMS update and create states",
         "de": "abhängigkeitsaktualisierung\nzusätzliche bauteil- und kanalauswahl\nfix Warnung nach FEMS-Update und Erstellung von Zuständen",
@@ -80,19 +93,6 @@
         "pl": "obliczenie samokonsumpcji\naktualizacje zależności",
         "uk": "розрахувати себе\nоновлення залежності",
         "zh-cn": "计算自耗\n依赖性更新"
-      },
-      "0.3.1": {
-        "en": "fix adapter checker warning",
-        "de": "fix adapter checker warnung",
-        "ru": "предупреждение адаптера",
-        "pt": "corrigir o aviso do verificador do adaptador",
-        "nl": "fix adapter controleer waarschuwing",
-        "fr": "correction de l'avertissement du vérificateur d'adaptateur",
-        "it": "correzione dell'avviso dell'adattatore",
-        "es": "aviso de comprobación del adaptador de fijación",
-        "pl": "poprawianie ostrzeżenia kontrolera adaptera",
-        "uk": "попередження перевірки адаптера",
-        "zh-cn": "固定适配器检查器警告"
       }
     },
     "titleLang": {
