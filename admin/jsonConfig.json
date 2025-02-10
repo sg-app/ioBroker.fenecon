@@ -29,12 +29,22 @@
 		},
 		"useCustomEndpoints": {
 			"type": "checkbox",
-			"label": "lblUseCustomEndpoints"
+			"label": "lblUseCustomEndpoints",
+			"xs": 12,
+			"sm": 12,
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		},
 		"descriptionWhenUseCusotomEndpoints": {
 			"type": "staticText",
 			"label": "lblUseCustomEndpointsDescription",
-			"hidden": "!data.useCustomEndpoints"
+			"hidden": "!data.useCustomEndpoints",
+			"xs": 12,
+			"sm": 12,
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		},
 		"endpoints": {
 			"type": "table",
@@ -42,6 +52,11 @@
 			"hidden": "!data.useCustomEndpoints",
 			"compact": true,
 			"uniqueColumns": ["componentId"],
+			"xs": 12,
+			"sm": 12,
+			"md": 12,
+			"lg": 12,
+			"xl": 12,
 			"items": [
 				{
 					"type": "text",
