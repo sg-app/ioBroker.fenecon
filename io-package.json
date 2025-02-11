@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "news": {
+      "0.6.2": {
+        "en": "fix loading single channel",
+        "de": "belastbarer einkanal",
+        "ru": "загрузка один канал",
+        "pt": "corrigir o carregamento único canal",
+        "nl": "fix laden van enkel kanaal",
+        "fr": "fixer le chargement à un seul canal",
+        "it": "fix caricamento singolo canale",
+        "es": "fijar la carga de un solo canal",
+        "pl": "naprawić ładowanie pojedynczego kanału",
+        "uk": "фіксувати завантаження одного каналу",
+        "zh-cn": "固定装入单个通道"
+      },
       "0.6.1": {
         "en": "fix missing size attributes",
         "de": "fehlende größenattribute beheben",
@@ -80,19 +93,6 @@
         "pl": "współczynnik dla najnowszego repo",
         "uk": "рефактор для останнього репо",
         "zh-cn": "最近重播的重构"
-      },
-      "0.3.2": {
-        "en": "calculate self consuming\ndependency updates",
-        "de": "selbstverbrauch berechnen\nabhängigkeitsaktualisierung",
-        "ru": "рассчитать самопотребление\nобновления зависимостей",
-        "pt": "calcular o auto consumo\natualizações de dependência",
-        "nl": "zelfconsumptie berekenen\nafhankelijkheidsupdates",
-        "fr": "calculer l'autoconsommation\nmises à jour des dépendances",
-        "it": "calcolare il consumo di auto\naggiornamenti di dipendenza",
-        "es": "calcular autoconsumo\nactualizaciones de la dependencia",
-        "pl": "obliczenie samokonsumpcji\naktualizacje zależności",
-        "uk": "розрахувати себе\nоновлення залежності",
-        "zh-cn": "计算自耗\n依赖性更新"
       }
     },
     "titleLang": {
