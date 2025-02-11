@@ -89,12 +89,19 @@ class Fenecon extends utils.Adapter {
 				const endpoints = this.config.endpoints;
 				const endpointResponses = await Promise.all(endpoints.map(endpoint => {
 					const getEndpoint = `${endpoint.componentId}/${endpoint.channelId}`;
+					this.log.silly(`[loadData] Endpoint:  ${getEndpoint}`);
 					return this.apiClient ? this.apiClient.get(getEndpoint) : Promise.reject(new Error("[loadData] API client is not defined"));
 				}));
+
+
 
 				endpointResponses.forEach(endpointResponse => {
 					this.log.silly(`[loadData] response ${endpointResponse.status}: ${JSON.stringify(endpointResponse.data)}`);
 					if (endpointResponse.status === 200) {
+						// Ensure endpointResponse is always an array
+						if (!Array.isArray(endpointResponse.data)) {
+							endpointResponse.data = [endpointResponse.data];
+						}
 						response.data.push(...endpointResponse.data);
 					}
 				});

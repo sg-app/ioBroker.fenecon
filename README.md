@@ -43,6 +43,8 @@ States are generated automatically whenn the adapter starts. If a status or chan
 
 ### **WORK IN PROGRESS**
 
+- (SG-App) fix loading single channel
+
 ### 0.6.1 (2025-02-10)
 
 - (SG-App) fix missing size attributes
