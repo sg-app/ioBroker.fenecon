@@ -137,8 +137,8 @@
 		"connectionType": "local",
 		"dataSource": "poll",
 		"adminUI": { "config": "json" },
-		"dependencies": [{ "js-controller": ">=5.0.19" }],
-		"globalDependencies": [{ "admin": ">=6.13.16" }]
+		"dependencies": [{ "js-controller": ">=6.0.0" }],
+		"globalDependencies": [{ "admin": ">=6.17.14" }]
 	},
 	"native": {
 		"ipAddress": "",
