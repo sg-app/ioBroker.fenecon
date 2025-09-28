@@ -51,7 +51,6 @@
 			"label": "lblEnpointsTable",
 			"hidden": "!data.useCustomEndpoints",
 			"compact": true,
-			"uniqueColumns": ["componentId"],
 			"xs": 12,
 			"sm": 12,
 			"md": 12,

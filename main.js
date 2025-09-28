@@ -87,22 +87,29 @@ class Fenecon extends utils.Adapter {
 				}
 			} else {
 				const endpoints = this.config.endpoints;
-				const endpointResponses = await Promise.all(endpoints.map(endpoint => {
-					const getEndpoint = `${endpoint.componentId}/${endpoint.channelId}`;
-					this.log.silly(`[loadData] Endpoint:  ${getEndpoint}`);
-					return this.apiClient ? this.apiClient.get(getEndpoint) : Promise.reject(new Error("[loadData] API client is not defined"));
-				}));
-
-
+				const endpointRequests = [];
+				endpoints.forEach(endpoint => {
+					const channelIds = (endpoint.channelId || "").split(";").map(id => id.trim()).filter(Boolean);
+					channelIds.forEach(channelId => {
+						const getEndpoint = `${endpoint.componentId}/${channelId}`;
+						this.log.silly(`[loadData] Endpoint:  ${getEndpoint}`);
+						endpointRequests.push(
+							this.apiClient
+								? this.apiClient.get(getEndpoint).catch(err => {
+									this.log.error(`[loadData] Error for endpoint ${getEndpoint}: ${err.message}`);
+									return null; // Fehlerhafte Antwort als null markieren
+								})
+								: Promise.reject(new Error("[loadData] API client is not defined"))
+						);
+					});
+				});
+				const endpointResponses = await Promise.all(endpointRequests);
 
 				endpointResponses.forEach(endpointResponse => {
-					this.log.silly(`[loadData] response ${endpointResponse.status}: ${JSON.stringify(endpointResponse.data)}`);
-					if (endpointResponse.status === 200) {
-						// Ensure endpointResponse is always an array
-						if (!Array.isArray(endpointResponse.data)) {
-							endpointResponse.data = [endpointResponse.data];
-						}
-						response.data.push(...endpointResponse.data);
+					if (endpointResponse && endpointResponse.status === 200) {
+						let data = endpointResponse.data;
+						if (!Array.isArray(data)) data = [data];
+						response.data.push(...data);
 					}
 				});
 			}
