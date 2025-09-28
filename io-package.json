@@ -1,156 +1,190 @@
 {
-	"common": {
-		"name": "fenecon",
-		"version": "0.6.2",
-		"news": {
-			"0.6.2": {
-				"en": "fix loading single channel",
-				"de": "belastbarer einkanal",
-				"ru": "загрузка один канал",
-				"pt": "corrigir o carregamento único canal",
-				"nl": "fix laden van enkel kanaal",
-				"fr": "fixer le chargement à un seul canal",
-				"it": "fix caricamento singolo canale",
-				"es": "fijar la carga de un solo canal",
-				"pl": "naprawić ładowanie pojedynczego kanału",
-				"uk": "фіксувати завантаження одного каналу",
-				"zh-cn": "固定装入单个通道"
-			},
-			"0.6.1": {
-				"en": "fix missing size attributes",
-				"de": "fehlende größenattribute beheben",
-				"ru": "исправить недостающие атрибуты",
-				"pt": "corrigir atributos de tamanho ausentes",
-				"nl": "ontbrekende grootte-attributen herstellen",
-				"fr": "correction des attributs de taille manquants",
-				"it": "correggere gli attributi delle dimensioni mancanti",
-				"es": "fijar atributos de tamaño perdido",
-				"pl": "naprawić brakujące atrybuty wielkości",
-				"uk": "виправити атрибути відсутніх розмірів",
-				"zh-cn": "修补缺失的大小属性"
-			},
-			"0.6.0": {
-				"en": "dependency updates\nadded component and channel selection\nfix warning after FEMS update and create states",
-				"de": "abhängigkeitsaktualisierung\nzusätzliche bauteil- und kanalauswahl\nfix Warnung nach FEMS-Update und Erstellung von Zuständen",
-				"ru": "обновления зависимостей\nдополнительный компонент и выбор канала\nисправить предупреждение после обновления и создания состояний",
-				"pt": "atualizações de dependência\ncomponente adicionado e seleção de canal\ncorrigir aviso após a atualização FEMS e criar estados",
-				"nl": "afhankelijkheidsupdates\ntoegevoegde component- en kanaalselectie\nfix waarschuwing na FEMS bijwerken en maken staten",
-				"fr": "mises à jour des dépendances\najout du composant et sélection des canaux\ncorriger l'avertissement après la mise à jour de FEMS et créer des états",
-				"it": "aggiornamenti di dipendenza\ncomponente aggiunto e selezione dei canali\ncorreggere l'avvertimento dopo l'aggiornamento FEMS e creare stati",
-				"es": "actualizaciones de la dependencia\ncomponente añadido y selección de canales\nfijar advertencia después de la actualización de FEMS y crear estados",
-				"pl": "aktualizacje zależności\ndodany wybór komponentów i kanałów\nnaprawić ostrzeżenie po aktualizacji FEMS i utworzyć stany",
-				"uk": "оновлення залежності\nдодано компонент і вибір каналів\nфіксувати попередження після оновлення FEMS і створити стани",
-				"zh-cn": "依赖性更新\n添加组件和频道选择\nfEMS 更新后固定警告并创建状态"
-			},
-			"0.5.0": {
-				"en": "set correct role states",
-				"de": "korrekte rollenzustände einstellen",
-				"ru": "правильность",
-				"pt": "definir estados de papel corretos",
-				"nl": "juiste rolstaten instellen",
-				"fr": "définir les états de rôle corrects",
-				"it": "impostare gli stati di ruolo corretti",
-				"es": "establecer el papel correcto",
-				"pl": "ustalenie prawidłowej roli państw",
-				"uk": "встановити правильну роль держави",
-				"zh-cn": "设定正确的角色状态"
-			},
-			"0.4.2": {
-				"en": "fix channel creation only one time on init",
-				"de": "fix kanal schöpfung nur ein mal auf init",
-				"ru": "зафиксировать создание канала только один раз",
-				"pt": "corrigir criação de canal apenas uma vez no init",
-				"nl": "fix kanaal aanmaak slechts één keer op init",
-				"fr": "fixer la création de canal une seule fois sur init",
-				"it": "correzione canale creazione solo una volta su init",
-				"es": "fijar la creación del canal sólo una vez en el init",
-				"pl": "naprawić tworzenie kanału tylko jeden raz na init",
-				"uk": "фіксувати створення каналів тільки один раз на init",
-				"zh-cn": "固定频道创建仅一次"
-			},
-			"0.4.1": {
-				"en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
-				"de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
-				"ru": "рефактор для последней репо\nудалить Object calls onit\nids объекта фильтра при необходимости\nпроверка разрешенной длины адреса для создания канала и id",
-				"pt": "refator para o último repo\nremover get O objeto chama a init\nfiltrar ids de objeto se necessário\nverificar o comprimento permitido do endereço para a criação de canal e id",
-				"nl": "refactor voor de laatste repo\nverwijderen get Object roept init aan\nfilterobject-id's indien nodig\nde toegestane lengte van het adres controleren voor kanaal- en id-aanmaak",
-				"fr": "refactor pour la dernière repo\nenlever obtenir L'objet appelle init\nids d'objet de filtre si nécessaire\nvérifier la longueur d'adresse autorisée pour la création de canal et d'id",
-				"it": "refactor per ultima repo\nrimuovere Oggetto chiama init\nfiltro oggetti ids se necessario\ncontrollare la lunghezza di indirizzo consentita per la creazione di canale e id",
-				"es": "refactor para el último repo\nretirar El objeto llama a la entrada\nfiltro objeto ids si es necesario\ncheck permitido longitud de dirección para canal y creación de id",
-				"pl": "współczynnik dla najnowszego repo\nusunąć Obiekt wywołuje init\nids obiektu filtrowania w razie potrzeby\nsprawdź dozwoloną długość adresu dla tworzenia kanału i identyfikatora",
-				"uk": "рефактор для останнього репо\nвидалити Об'єктні дзвінки на init\nфільтр об'єкта кришки, якщо потрібно\nперевірити допустиму довжину адреси для каналу і створення id",
-				"zh-cn": "最近重播的重构\n删除 对象调用init\n需要时过滤对象编号\n检查频道和 id 创建的允许地址长度"
-			},
-			"0.4.0": {
-				"en": "refactor for latest repo",
-				"de": "refactor für neueste repo",
-				"ru": "рефактор для последней репо",
-				"pt": "refator para o último repo",
-				"nl": "refactor voor de laatste repo",
-				"fr": "refactor pour la dernière repo",
-				"it": "refactor per ultima repo",
-				"es": "refactor para el último repo",
-				"pl": "współczynnik dla najnowszego repo",
-				"uk": "рефактор для останнього репо",
-				"zh-cn": "最近重播的重构"
-			}
-		},
-		"titleLang": {
-			"en": "Fenecon",
-			"de": "Fenecon",
-			"ru": "Фенекон",
-			"pt": "Fenecón",
-			"nl": "Fenecon",
-			"fr": "Fénécon",
-			"it": "Fenecon",
-			"es": "Fenecón",
-			"pl": "Fenekon",
-			"uk": "Фенекон",
-			"zh-cn": "芬内康"
-		},
-		"desc": {
-			"en": "OpenEMS connection to fenecon pv",
-			"de": "OpenEMS-Anbindung an fenecon pv",
-			"ru": "Подключение OpenEMS к Fenecon Pv",
-			"pt": "Conexão OpenEMS com fenecon pv",
-			"nl": "OpenEMS-verbinding met fenecon pv",
-			"fr": "Connexion OpenEMS à Fenecon PV",
-			"it": "Connessione OpenEMS a fenecon pv",
-			"es": "Conexión OpenEMS a fenecon pv",
-			"pl": "Połączenie OpenEMS z fenecon pv",
-			"uk": "Підключення OpenEMS до fenecon pv",
-			"zh-cn": "OpenEMS 与 fenecon pv 的连接"
-		},
-		"authors": ["Georg Schreiner <info@sg-app.de>"],
-		"keywords": ["fenecon", "openems", "FEMS", "PV inverter", "Energy storage system", "Energy management system"],
-		"licenseInformation": { "type": "free", "license": "MIT" },
-		"platform": "Javascript/Node.js",
-		"icon": "fenecon.png",
-		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
-		"readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
-		"loglevel": "info",
-		"tier": 3,
-		"mode": "daemon",
-		"type": "energy",
-		"compact": true,
-		"connectionType": "local",
-		"dataSource": "poll",
-		"adminUI": { "config": "json" },
-		"dependencies": [{ "js-controller": ">=6.0.0" }],
-		"globalDependencies": [{ "admin": ">=6.17.14" }]
-	},
-	"native": {
-		"ipAddress": "",
-		"refreshIntervall": 30,
-		"useCustomEndpoints": false,
-		"endpoints": [
-			{ "componentId": "_sum", "channelId": ".*" },
-			{ "componentId": "ess0", "channelId": ".*" },
-			{ "componentId": "charger.*", "channelId": ".*" },
-			{ "componentId": "meter0", "channelId": ".*" }
-		]
-	},
-	"objects": [],
-	"instanceObjects": []
+  "common": {
+    "name": "fenecon",
+    "version": "0.7.0",
+    "news": {
+      "0.7.0": {
+        "en": "dependency updates\nallow multi channel configuration\noptimize Rest request and log channel not exists",
+        "de": "abhängigkeitsaktualisierung\nmultikanalkonfiguration\noptimierung Ruheanfrage und Log-Kanal nicht vorhanden",
+        "ru": "обновления зависимостей\nмногоканальная конфигурация\nоптимизировать Запрос на отдых и логарифмический канал отсутствуют",
+        "pt": "atualizações de dependência\npermitir a configuração de vários canais\notimizar O pedido de descanso e o canal de log não existem",
+        "nl": "afhankelijkheidsupdates\nmultikanaalconfiguratie toestaan\noptimaliseren Restverzoek en logkanaal bestaan niet",
+        "fr": "mises à jour des dépendances\npermettre la configuration de plusieurs canaux\noptimiser Demande de repos et canal de journal n'existe pas",
+        "it": "aggiornamenti di dipendenza\nconsentire la configurazione multi canale\nottimizzare Richiesta di riposo e canale di log non esiste",
+        "es": "actualizaciones de la dependencia\npermite configuración de varios canales\noptimización Solicitud de descanso y canal de registro no existe",
+        "pl": "aktualizacje zależności\numożliwia konfigurację wielu kanałów\noptymalizacja Żądanie odpoczynku i kanał logowania nie istnieje",
+        "uk": "оновлення залежності\nможливість багатоканальної конфігурації\nоптимізація Решта запиту та журналу не існує",
+        "zh-cn": "依赖性更新\n允许多频道配置\n优化 暂停请求和日志通道不存在"
+      },
+      "0.6.2": {
+        "en": "fix loading single channel",
+        "de": "belastbarer einkanal",
+        "ru": "загрузка один канал",
+        "pt": "corrigir o carregamento único canal",
+        "nl": "fix laden van enkel kanaal",
+        "fr": "fixer le chargement à un seul canal",
+        "it": "fix caricamento singolo canale",
+        "es": "fijar la carga de un solo canal",
+        "pl": "naprawić ładowanie pojedynczego kanału",
+        "uk": "фіксувати завантаження одного каналу",
+        "zh-cn": "固定装入单个通道"
+      },
+      "0.6.1": {
+        "en": "fix missing size attributes",
+        "de": "fehlende größenattribute beheben",
+        "ru": "исправить недостающие атрибуты",
+        "pt": "corrigir atributos de tamanho ausentes",
+        "nl": "ontbrekende grootte-attributen herstellen",
+        "fr": "correction des attributs de taille manquants",
+        "it": "correggere gli attributi delle dimensioni mancanti",
+        "es": "fijar atributos de tamaño perdido",
+        "pl": "naprawić brakujące atrybuty wielkości",
+        "uk": "виправити атрибути відсутніх розмірів",
+        "zh-cn": "修补缺失的大小属性"
+      },
+      "0.6.0": {
+        "en": "dependency updates\nadded component and channel selection\nfix warning after FEMS update and create states",
+        "de": "abhängigkeitsaktualisierung\nzusätzliche bauteil- und kanalauswahl\nfix Warnung nach FEMS-Update und Erstellung von Zuständen",
+        "ru": "обновления зависимостей\nдополнительный компонент и выбор канала\nисправить предупреждение после обновления и создания состояний",
+        "pt": "atualizações de dependência\ncomponente adicionado e seleção de canal\ncorrigir aviso após a atualização FEMS e criar estados",
+        "nl": "afhankelijkheidsupdates\ntoegevoegde component- en kanaalselectie\nfix waarschuwing na FEMS bijwerken en maken staten",
+        "fr": "mises à jour des dépendances\najout du composant et sélection des canaux\ncorriger l'avertissement après la mise à jour de FEMS et créer des états",
+        "it": "aggiornamenti di dipendenza\ncomponente aggiunto e selezione dei canali\ncorreggere l'avvertimento dopo l'aggiornamento FEMS e creare stati",
+        "es": "actualizaciones de la dependencia\ncomponente añadido y selección de canales\nfijar advertencia después de la actualización de FEMS y crear estados",
+        "pl": "aktualizacje zależności\ndodany wybór komponentów i kanałów\nnaprawić ostrzeżenie po aktualizacji FEMS i utworzyć stany",
+        "uk": "оновлення залежності\nдодано компонент і вибір каналів\nфіксувати попередження після оновлення FEMS і створити стани",
+        "zh-cn": "依赖性更新\n添加组件和频道选择\nfEMS 更新后固定警告并创建状态"
+      },
+      "0.5.0": {
+        "en": "set correct role states",
+        "de": "korrekte rollenzustände einstellen",
+        "ru": "правильность",
+        "pt": "definir estados de papel corretos",
+        "nl": "juiste rolstaten instellen",
+        "fr": "définir les états de rôle corrects",
+        "it": "impostare gli stati di ruolo corretti",
+        "es": "establecer el papel correcto",
+        "pl": "ustalenie prawidłowej roli państw",
+        "uk": "встановити правильну роль держави",
+        "zh-cn": "设定正确的角色状态"
+      },
+      "0.4.2": {
+        "en": "fix channel creation only one time on init",
+        "de": "fix kanal schöpfung nur ein mal auf init",
+        "ru": "зафиксировать создание канала только один раз",
+        "pt": "corrigir criação de canal apenas uma vez no init",
+        "nl": "fix kanaal aanmaak slechts één keer op init",
+        "fr": "fixer la création de canal une seule fois sur init",
+        "it": "correzione canale creazione solo una volta su init",
+        "es": "fijar la creación del canal sólo una vez en el init",
+        "pl": "naprawić tworzenie kanału tylko jeden raz na init",
+        "uk": "фіксувати створення каналів тільки один раз на init",
+        "zh-cn": "固定频道创建仅一次"
+      },
+      "0.4.1": {
+        "en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
+        "de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
+        "ru": "рефактор для последней репо\nудалить Object calls onit\nids объекта фильтра при необходимости\nпроверка разрешенной длины адреса для создания канала и id",
+        "pt": "refator para o último repo\nremover get O objeto chama a init\nfiltrar ids de objeto se necessário\nverificar o comprimento permitido do endereço para a criação de canal e id",
+        "nl": "refactor voor de laatste repo\nverwijderen get Object roept init aan\nfilterobject-id's indien nodig\nde toegestane lengte van het adres controleren voor kanaal- en id-aanmaak",
+        "fr": "refactor pour la dernière repo\nenlever obtenir L'objet appelle init\nids d'objet de filtre si nécessaire\nvérifier la longueur d'adresse autorisée pour la création de canal et d'id",
+        "it": "refactor per ultima repo\nrimuovere Oggetto chiama init\nfiltro oggetti ids se necessario\ncontrollare la lunghezza di indirizzo consentita per la creazione di canale e id",
+        "es": "refactor para el último repo\nretirar El objeto llama a la entrada\nfiltro objeto ids si es necesario\ncheck permitido longitud de dirección para canal y creación de id",
+        "pl": "współczynnik dla najnowszego repo\nusunąć Obiekt wywołuje init\nids obiektu filtrowania w razie potrzeby\nsprawdź dozwoloną długość adresu dla tworzenia kanału i identyfikatora",
+        "uk": "рефактор для останнього репо\nвидалити Об'єктні дзвінки на init\nфільтр об'єкта кришки, якщо потрібно\nперевірити допустиму довжину адреси для каналу і створення id",
+        "zh-cn": "最近重播的重构\n删除 对象调用init\n需要时过滤对象编号\n检查频道和 id 创建的允许地址长度"
+      }
+    },
+    "titleLang": {
+      "en": "Fenecon",
+      "de": "Fenecon",
+      "ru": "Фенекон",
+      "pt": "Fenecón",
+      "nl": "Fenecon",
+      "fr": "Fénécon",
+      "it": "Fenecon",
+      "es": "Fenecón",
+      "pl": "Fenekon",
+      "uk": "Фенекон",
+      "zh-cn": "芬内康"
+    },
+    "desc": {
+      "en": "OpenEMS connection to fenecon pv",
+      "de": "OpenEMS-Anbindung an fenecon pv",
+      "ru": "Подключение OpenEMS к Fenecon Pv",
+      "pt": "Conexão OpenEMS com fenecon pv",
+      "nl": "OpenEMS-verbinding met fenecon pv",
+      "fr": "Connexion OpenEMS à Fenecon PV",
+      "it": "Connessione OpenEMS a fenecon pv",
+      "es": "Conexión OpenEMS a fenecon pv",
+      "pl": "Połączenie OpenEMS z fenecon pv",
+      "uk": "Підключення OpenEMS до fenecon pv",
+      "zh-cn": "OpenEMS 与 fenecon pv 的连接"
+    },
+    "authors": [
+      "Georg Schreiner <info@sg-app.de>"
+    ],
+    "keywords": [
+      "fenecon",
+      "openems",
+      "FEMS",
+      "PV inverter",
+      "Energy storage system",
+      "Energy management system"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "fenecon.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
+    "readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
+    "loglevel": "info",
+    "tier": 3,
+    "mode": "daemon",
+    "type": "energy",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=6.17.14"
+      }
+    ]
+  },
+  "native": {
+    "ipAddress": "",
+    "refreshIntervall": 30,
+    "useCustomEndpoints": false,
+    "endpoints": [
+      {
+        "componentId": "_sum",
+        "channelId": ".*"
+      },
+      {
+        "componentId": "ess0",
+        "channelId": ".*"
+      },
+      {
+        "componentId": "charger.*",
+        "channelId": ".*"
+      },
+      {
+        "componentId": "meter0",
+        "channelId": ".*"
+      }
+    ]
+  },
+  "objects": [],
+  "instanceObjects": []
 }
