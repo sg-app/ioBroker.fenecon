@@ -106,6 +106,8 @@ States are generated automatically whenn the adapter starts. If a status or chan
 
 - (SG-App) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 MIT License
