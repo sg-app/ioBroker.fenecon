@@ -1,4 +1,6 @@
-const states = [
+import type { StateDefinition } from './types';
+
+export const definitions: StateDefinition[] = [
     { address: '_host/_PropertyCycleTime', type: 'INTEGER', accessMode: 'RO', unit: '', role: 'value' },
     { address: '_host/_PropertyCurrency', type: 'STRING', accessMode: 'RO', unit: '', role: 'text' },
     { address: '_host/_PropertyEssMaxDischargePower', type: 'INTEGER', accessMode: 'RO', unit: '', role: 'value' },
@@ -4732,4 +4734,7 @@ const states = [
     { address: '_sum/Autarchy', type: 'INTEGER', accessMode: 'RO', unit: '', role: 'value' },
 ];
 
-module.exports = states;
+// Lookup map for fast access by FEMS address (built once at module load)
+export const statesByAddress: ReadonlyMap<string, StateDefinition> = new Map<string, StateDefinition>(
+    definitions.map((definition: StateDefinition): [string, StateDefinition] => [definition.address, definition]),
+);
