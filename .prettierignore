@@ -1,2 +1,5 @@
 package.json
 package-lock.json
+build
+node_modules
+admin/i18n

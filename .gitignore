@@ -11,6 +11,11 @@ nbproject
 iobroker.*.tgz
 
 Thumbs.db
+.commitinfo
+
+# compiled TypeScript output
+build
+*.tsbuildinfo
 
 # i18n intermediate files
 admin/i18n/flat.txt
