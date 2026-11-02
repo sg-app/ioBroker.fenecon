@@ -34,12 +34,26 @@ The endpoints are configured in the table.
 
 States are generated automatically whenn the adapter starts. If a status or channel is accidentally deleted, warnings appear in the log file. Restart the adapter and the states will be generated.
 
-## Changelog
+## Developer notes
 
+The adapter is written in TypeScript. The sources live in `src/` and the compiled output is generated into `build/`, which is the directory shipped with the npm package.
+
+- `npm run build` compiles the sources
+- `npm run watch` recompiles on every change
+- `npm run check` runs the strict type check
+- `npm run test` runs the unit tests and the ioBroker package tests
+
+## Changelog
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (SG-App) migrate the adapter sources to TypeScript, compiled output is generated into `build/`
+- (SG-App) validate the configured IP address strictly as IPv4
+- (SG-App) use the sanitized channel and state names consistently for the object ids
+
 ### 0.7.0 (2025-09-28)
 
 - (SG-App) dependency updates
