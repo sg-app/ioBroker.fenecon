@@ -50,9 +50,8 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   os: ${{ matrix.os }}
-                  # The adapter is written in TypeScript and the compiled output (build/) is not
-                  # committed to git. Without this build step the integration test cannot find
-                  # the main file (build/main.js) and "The adapter starts" runs into a timeout.
+                  # The adapter is written in TypeScript. Rebuild the compiled output (build/)
+                  # so the integration test runs against the current sources.
                   build: true
                   # The unit tests live in src/**/*.test.ts and are collected by the "test:ts" script
                   unit-test-check-pattern: 'test:ts'
@@ -84,8 +83,8 @@ jobs:
             - uses: ioBroker/testing-action-deploy@v1
               with:
                   node-version: '24.x'
-                  # The compiled output (build/) is not committed to git, so it has to be built
-                  # before publishing - otherwise the npm package would not contain main.js
+                  # Rebuild the compiled output (build/) before publishing so the npm package
+                  # stays in sync with the sources.
                   build: true
                   # Uncomment the following line if your adapter cannot be installed using 'npm ci'
                   # install-command: 'npm install'
