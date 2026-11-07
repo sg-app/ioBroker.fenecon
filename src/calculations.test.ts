@@ -40,6 +40,12 @@ describe('lib/calculations', () => {
             expect(calculateSelfConsumption(0, 2000)).to.equal(100);
         });
 
+        it('returns 100 percent when buying from the grid', () => {
+            // producing 2000 W but consuming 3000 W => buying 1000 W from the grid
+            // => nothing is fed in => 100 % self consumption
+            expect(calculateSelfConsumption(1000, 2000)).to.equal(100);
+        });
+
         it('clamps the result to the range between 0 and 100', () => {
             expect(calculateSelfConsumption(-5000, 2000)).to.equal(0);
         });

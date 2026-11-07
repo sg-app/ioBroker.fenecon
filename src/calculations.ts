@@ -24,8 +24,11 @@ export function calculateAutarchy(
  * Calculates the self consumption rate in percent.
  *
  * The self consumption describes the share of the production that was consumed
- * instead of being fed into the grid. Selling to the grid is expressed as a
- * negative grid active power, so its absolute value is used here.
+ * instead of being fed into the grid. The grid active power is positive while
+ * buying from the grid and negative while feeding into the grid, so the sell to
+ * grid power is its inverted value (`-gridActivePower`). Buying from the grid
+ * therefore yields a negative sell to grid power and thus 100 % self
+ * consumption.
  *
  * @param gridActivePower - Grid active power in W (negative means feeding into the grid)
  * @param productionActivePower - Production active power in W
@@ -39,7 +42,8 @@ export function calculateSelfConsumption(
         return null;
     }
 
-    const sellToGrid = gridActivePower === null ? 0 : Math.abs(gridActivePower);
+    // Sell to grid is the inverted grid active power (openems definition).
+    const sellToGrid = gridActivePower === null ? 0 : -gridActivePower;
     const selfConsumption = (1 - sellToGrid / productionActivePower) * 100;
 
     return Math.max(0, Math.min(100, Math.floor(selfConsumption)));
