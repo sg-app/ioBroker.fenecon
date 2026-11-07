@@ -150,8 +150,7 @@ For live validation use the [@iobroker/dev-server](https://github.com/ioBroker/d
 <!--
 	Placeholder for the next version (at the beginning of the line):
 -->
-
-### **WORK IN PROGRESS**
+### 1.0.1 (2026-11-07)
 
 - (SG-App) update mapping table after FEMS update to 2026.10.2
 
@@ -183,12 +182,6 @@ For live validation use the [@iobroker/dev-server](https://github.com/ioBroker/d
 ### 0.6.1 (2025-02-10)
 
 - (SG-App) fix missing size attributes
-
-### 0.6.0 (2025-02-07)
-
-- (SG-App) dependency updates
-- (SG-App) added component and channel selection
-- (SG-App) fix warning after FEMS update and create states
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

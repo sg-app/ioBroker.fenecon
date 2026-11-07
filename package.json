@@ -1,6 +1,6 @@
 {
   "name": "iobroker.fenecon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OpenEMS connection to fenecon pv",
   "author": {
     "name": "Georg Schreiner",

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fenecon",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "update mapping table after FEMS update to 2026.10.2",
+        "de": "Mapping-Tabelle nach FEMS-Update auf 2026.10.2",
+        "ru": "обновить таблицу сопоставления после обновления FEMS до 2026.10.2",
+        "pt": "atualizar tabela de mapeamento após o FEMS 2026.10.2",
+        "nl": "de kaarttabel bijwerken na de FEMS-update naar 2026.10.2",
+        "fr": "table de mappage après la mise à jour de la FEMS en 2026.10.2",
+        "it": "aggiorna la tabella dopo il FEMS al 2026.10.2",
+        "es": "actualizar la tabla de mapas tras la actualización de FEMS a 2026.10.2",
+        "pl": "aktualizacja tabeli mapowania po aktualizacji FEMS do 2026.10.2",
+        "uk": "оновити таблицю відображення після оновлення FEMS до 2026.10.2",
+        "zh-cn": "在 FEMS 更新到 2026.10.2 之后更新映射表"
+      },
       "1.0.0": {
         "en": "migrate the adapter sources to TypeScript, compiled output is generated into `build/`\nvalidate the configured IP address strictly as IPv4\nuse the sanitized channel and state names consistently for the object ids\nvalidate the FEMS response and drop invalid entries instead of creating nonsense states\nonly write states when the value changed, with a heartbeat to refresh the timestamps\nwrite state updates in parallel batches to lower the CPU load\ncache the existing objects at startup and only extend objects when the definition changed\nassign a specific role to every known state and log unknown channels for later additions\nadd the channels reported as unknown to the state mapping table\nsupport writing values back to FEMS through onStateChange for writable channels\nconvert the temperature values delivered in deci degrees Celsius (dC) to degrees Celsius\nextend the README with a detailed adapter description, configuration, state overview and troubleshooting",
         "de": "Migrieren Sie die Adapterquellen zu TypeScript, kompiliert in `build/`\nBestätigen Sie die konfigurierte IP nur als IPv4\nBenutze den bereinigten Kanal und Statusnamen für die Objekt-IDs\nvalidieren Sie die FEMS-Antwort und löschen Sie Unsinn statt Unsinn\nStatus nur bei Wertänderung schreiben, mit Heartbeat zum Aktualisieren der Zeitstempel\nStapelweise Status-Updates schreiben, um die CPU zu entlasten\nObjekte beim Start zwischenspeichern und nur erweitern, wenn sich die Definition ändert\nWeist jedem Staat eine Rolle zu und logge unbekannte Kanäle für später\nDie als unbekannt gemeldeten Kanäle zur Zuordnungstabelle hinzufügen\nunterstützt Rückschreiben von Werten an FEMS über OnStateChange für Kanäle\nrechnen Sie die Temperaturwerte in Grad Celsius (dC) in Grad Celsius um\nerweitert die README-Datei um Adapterbeschreibung, Konfiguration, Status und Fehlerbehebung",
@@ -80,19 +93,6 @@
         "pl": "ustalenie prawidłowej roli państw",
         "uk": "встановити правильну роль держави",
         "zh-cn": "设定正确的角色状态"
-      },
-      "0.4.2": {
-        "en": "fix channel creation only one time on init",
-        "de": "fix kanal schöpfung nur ein mal auf init",
-        "ru": "зафиксировать создание канала только один раз",
-        "pt": "corrigir criação de canal apenas uma vez no init",
-        "nl": "fix kanaal aanmaak slechts één keer op init",
-        "fr": "fixer la création de canal une seule fois sur init",
-        "it": "correzione canale creazione solo una volta su init",
-        "es": "fijar la creación del canal sólo una vez en el init",
-        "pl": "naprawić tworzenie kanału tylko jeden raz na init",
-        "uk": "фіксувати створення каналів тільки один раз на init",
-        "zh-cn": "固定频道创建仅一次"
       }
     },
     "titleLang": {

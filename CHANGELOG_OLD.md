@@ -1,4 +1,10 @@
 # Older changes
+## 0.6.0 (2025-02-07)
+
+- (SG-App) dependency updates
+- (SG-App) added component and channel selection
+- (SG-App) fix warning after FEMS update and create states
+
 ## 0.5.0 (2024-08-02)
 
 - (SG-App) set correct role states
