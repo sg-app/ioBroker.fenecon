@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/constants.ts"],
+  "sourcesContent": ["/**\n * Fallback RegExp of characters that are forbidden in ioBroker object IDs.\n *\n * The adapter normally uses `adapter.FORBIDDEN_CHARS`, which is provided by the\n * ioBroker core. This constant exists so that the helpers stay testable without\n * a running ioBroker instance.\n */\nexport const DEFAULT_FORBIDDEN_CHARS = /[.\\s*?\"]/g;\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAOO,MAAM,0BAA0B;",
+  "names": []
+}
