@@ -149,8 +149,12 @@ For live validation use the [@iobroker/dev-server](https://github.com/ioBroker/d
 
 <!--
 	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- (SG-App) update mapping table after FEMS update to 2026.10.2
+
 ### 1.0.0 (2026-11-07)
 
 - (SG-App) migrate the adapter sources to TypeScript, compiled output is generated into `build/`
