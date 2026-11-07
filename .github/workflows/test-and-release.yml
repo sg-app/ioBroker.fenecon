@@ -31,6 +31,7 @@ jobs:
                   node-version: '24.x'
                   # Uncomment the following line if your adapter cannot be installed using 'npm ci'
                   # install-command: 'npm install'
+                  type-checking: true
                   lint: true
 
     # Runs adapter tests on all supported node versions and OSes
@@ -49,6 +50,13 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   os: ${{ matrix.os }}
+                  # The adapter is written in TypeScript and the compiled output (build/) is not
+                  # committed to git. Without this build step the integration test cannot find
+                  # the main file (build/main.js) and "The adapter starts" runs into a timeout.
+                  build: true
+                  # The unit tests live in src/**/*.test.ts and are collected by the "test:ts" script
+                  unit-test-check-pattern: 'test:ts'
+                  unit-test-command: 'npm run test:ts'
                   # Uncomment the following line if your adapter cannot be installed using 'npm ci'
                   # install-command: 'npm install'
 
@@ -76,6 +84,9 @@ jobs:
             - uses: ioBroker/testing-action-deploy@v1
               with:
                   node-version: '24.x'
+                  # The compiled output (build/) is not committed to git, so it has to be built
+                  # before publishing - otherwise the npm package would not contain main.js
+                  build: true
                   # Uncomment the following line if your adapter cannot be installed using 'npm ci'
                   # install-command: 'npm install'
                   #npm-token: ${{ secrets.NPM_TOKEN }}
