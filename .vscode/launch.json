@@ -8,12 +8,11 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "node_modules/iobroker.fenecon/main.js",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "node_modules/iobroker.fenecon/build/main.js",
             "args": ["--debug", "0"],
-            "cwd": "${workspaceFolder}/.dev-server/default"
+            "cwd": "${workspaceFolder}/.dev-server/default",
+            "preLaunchTask": "npm: build"
         }
     ]
 }

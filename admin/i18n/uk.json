@@ -1,0 +1,11 @@
+{
+    "fenecon adapter settings": "Налаштування адаптера для fenecon",
+    "lblChannelId": "Ідентифікатор каналу",
+    "lblComponentId": "Ідентифікатор компонента",
+    "lblEnpointsTable": "Кінцеві точки",
+    "lblIpAddress": "IP-адреса",
+    "lblIpAddressValidationError": "IP-адреса має неправильний формат!",
+    "lblRefreshIntervall": "Інтервал оновлення",
+    "lblUseCustomEndpoints": "Використовуйте кінцеві точки, визначені користувачем",
+    "lblUseCustomEndpointsDescription": "Якщо ви використовуєте власні кінцеві точки, ви можете вказати кінцеві точки для спілкування з сервером Fenecon.\r\nЦе передбачає налаштування компонента та каналу. Наприклад, всі канали з компонента можна отримати, уточнюючи канал із символом Wildcard '.*'."
+}

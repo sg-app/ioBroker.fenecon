@@ -1,0 +1,11 @@
+{
+    "fenecon adapter settings": "Paramètres d'adaptateur pour fenecon",
+    "lblChannelId": "ID de canal",
+    "lblComponentId": "ID de composant",
+    "lblEnpointsTable": "Points de terminaison",
+    "lblIpAddress": "adresse IP",
+    "lblIpAddressValidationError": "L'adresse IP a un mauvais format !",
+    "lblRefreshIntervall": "Intervalle d'actualisation",
+    "lblUseCustomEndpoints": "Utiliser des points de terminaison définis par l'utilisateur",
+    "lblUseCustomEndpointsDescription": "Si vous utilisez des points de terminaison personnalisés, vous pouvez spécifier les points de terminaison pour la communication avec le serveur Fecon.\r\nCela implique la configuration du composant et du canal. Par exemple, tous les canaux d'un composant peuvent être récupérés en spécifiant le canal avec le caractère générique '. *'."
+}
