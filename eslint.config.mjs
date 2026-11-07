@@ -17,7 +17,6 @@ export default [
       'node_modules/',
       'test/**/*.js',
       '*.config.mjs',
-      'admin/words.js',
       'admin/**/*.d.ts',
       'src/**/*.d.ts',
       'widgets/**/*.js',
