@@ -1,181 +1,190 @@
 {
-    "common": {
-        "name": "fenecon",
-        "version": "0.7.0",
-        "news": {
-            "0.7.0": {
-                "en": "dependency updates\nallow multi channel configuration\noptimize Rest request and log channel not exists",
-                "de": "abhängigkeitsaktualisierung\nmultikanalkonfiguration\noptimierung Ruheanfrage und Log-Kanal nicht vorhanden",
-                "ru": "обновления зависимостей\nмногоканальная конфигурация\nоптимизировать Запрос на отдых и логарифмический канал отсутствуют",
-                "pt": "atualizações de dependência\npermitir a configuração de vários canais\notimizar O pedido de descanso e o canal de log não existem",
-                "nl": "afhankelijkheidsupdates\nmultikanaalconfiguratie toestaan\noptimaliseren Restverzoek en logkanaal bestaan niet",
-                "fr": "mises à jour des dépendances\npermettre la configuration de plusieurs canaux\noptimiser Demande de repos et canal de journal n'existe pas",
-                "it": "aggiornamenti di dipendenza\nconsentire la configurazione multi canale\nottimizzare Richiesta di riposo e canale di log non esiste",
-                "es": "actualizaciones de la dependencia\npermite configuración de varios canales\noptimización Solicitud de descanso y canal de registro no existe",
-                "pl": "aktualizacje zależności\numożliwia konfigurację wielu kanałów\noptymalizacja Żądanie odpoczynku i kanał logowania nie istnieje",
-                "uk": "оновлення залежності\nможливість багатоканальної конфігурації\nоптимізація Решта запиту та журналу не існує",
-                "zh-cn": "依赖性更新\n允许多频道配置\n优化 暂停请求和日志通道不存在"
-            },
-            "0.6.2": {
-                "en": "fix loading single channel",
-                "de": "belastbarer einkanal",
-                "ru": "загрузка один канал",
-                "pt": "corrigir o carregamento único canal",
-                "nl": "fix laden van enkel kanaal",
-                "fr": "fixer le chargement à un seul canal",
-                "it": "fix caricamento singolo canale",
-                "es": "fijar la carga de un solo canal",
-                "pl": "naprawić ładowanie pojedynczego kanału",
-                "uk": "фіксувати завантаження одного каналу",
-                "zh-cn": "固定装入单个通道"
-            },
-            "0.6.1": {
-                "en": "fix missing size attributes",
-                "de": "fehlende größenattribute beheben",
-                "ru": "исправить недостающие атрибуты",
-                "pt": "corrigir atributos de tamanho ausentes",
-                "nl": "ontbrekende grootte-attributen herstellen",
-                "fr": "correction des attributs de taille manquants",
-                "it": "correggere gli attributi delle dimensioni mancanti",
-                "es": "fijar atributos de tamaño perdido",
-                "pl": "naprawić brakujące atrybuty wielkości",
-                "uk": "виправити атрибути відсутніх розмірів",
-                "zh-cn": "修补缺失的大小属性"
-            },
-            "0.6.0": {
-                "en": "dependency updates\nadded component and channel selection\nfix warning after FEMS update and create states",
-                "de": "abhängigkeitsaktualisierung\nzusätzliche bauteil- und kanalauswahl\nfix Warnung nach FEMS-Update und Erstellung von Zuständen",
-                "ru": "обновления зависимостей\nдополнительный компонент и выбор канала\nисправить предупреждение после обновления и создания состояний",
-                "pt": "atualizações de dependência\ncomponente adicionado e seleção de canal\ncorrigir aviso após a atualização FEMS e criar estados",
-                "nl": "afhankelijkheidsupdates\ntoegevoegde component- en kanaalselectie\nfix waarschuwing na FEMS bijwerken en maken staten",
-                "fr": "mises à jour des dépendances\najout du composant et sélection des canaux\ncorriger l'avertissement après la mise à jour de FEMS et créer des états",
-                "it": "aggiornamenti di dipendenza\ncomponente aggiunto e selezione dei canali\ncorreggere l'avvertimento dopo l'aggiornamento FEMS e creare stati",
-                "es": "actualizaciones de la dependencia\ncomponente añadido y selección de canales\nfijar advertencia después de la actualización de FEMS y crear estados",
-                "pl": "aktualizacje zależności\ndodany wybór komponentów i kanałów\nnaprawić ostrzeżenie po aktualizacji FEMS i utworzyć stany",
-                "uk": "оновлення залежності\nдодано компонент і вибір каналів\nфіксувати попередження після оновлення FEMS і створити стани",
-                "zh-cn": "依赖性更新\n添加组件和频道选择\nfEMS 更新后固定警告并创建状态"
-            },
-            "0.5.0": {
-                "en": "set correct role states",
-                "de": "korrekte rollenzustände einstellen",
-                "ru": "правильность",
-                "pt": "definir estados de papel corretos",
-                "nl": "juiste rolstaten instellen",
-                "fr": "définir les états de rôle corrects",
-                "it": "impostare gli stati di ruolo corretti",
-                "es": "establecer el papel correcto",
-                "pl": "ustalenie prawidłowej roli państw",
-                "uk": "встановити правильну роль держави",
-                "zh-cn": "设定正确的角色状态"
-            },
-            "0.4.2": {
-                "en": "fix channel creation only one time on init",
-                "de": "fix kanal schöpfung nur ein mal auf init",
-                "ru": "зафиксировать создание канала только один раз",
-                "pt": "corrigir criação de canal apenas uma vez no init",
-                "nl": "fix kanaal aanmaak slechts één keer op init",
-                "fr": "fixer la création de canal une seule fois sur init",
-                "it": "correzione canale creazione solo una volta su init",
-                "es": "fijar la creación del canal sólo una vez en el init",
-                "pl": "naprawić tworzenie kanału tylko jeden raz na init",
-                "uk": "фіксувати створення каналів тільки один раз на init",
-                "zh-cn": "固定频道创建仅一次"
-            },
-            "0.4.1": {
-                "en": "refactor for latest repo\nremove getObject calls on init\nfilter object ids if needed\ncheck allowed length of address for channel and id creation",
-                "de": "refactor für neueste repo\nentfernen Objektaufrufe auf init\nfilterobjekt ids bei bedarf\ndie länge der adresse für kanal und id schöpfung",
-                "ru": "рефактор для последней репо\nудалить Object calls onit\nids объекта фильтра при необходимости\nпроверка разрешенной длины адреса для создания канала и id",
-                "pt": "refator para o último repo\nremover get O objeto chama a init\nfiltrar ids de objeto se necessário\nverificar o comprimento permitido do endereço para a criação de canal e id",
-                "nl": "refactor voor de laatste repo\nverwijderen get Object roept init aan\nfilterobject-id's indien nodig\nde toegestane lengte van het adres controleren voor kanaal- en id-aanmaak",
-                "fr": "refactor pour la dernière repo\nenlever obtenir L'objet appelle init\nids d'objet de filtre si nécessaire\nvérifier la longueur d'adresse autorisée pour la création de canal et d'id",
-                "it": "refactor per ultima repo\nrimuovere Oggetto chiama init\nfiltro oggetti ids se necessario\ncontrollare la lunghezza di indirizzo consentita per la creazione di canale e id",
-                "es": "refactor para el último repo\nretirar El objeto llama a la entrada\nfiltro objeto ids si es necesario\ncheck permitido longitud de dirección para canal y creación de id",
-                "pl": "współczynnik dla najnowszego repo\nusunąć Obiekt wywołuje init\nids obiektu filtrowania w razie potrzeby\nsprawdź dozwoloną długość adresu dla tworzenia kanału i identyfikatora",
-                "uk": "рефактор для останнього репо\nвидалити Об'єктні дзвінки на init\nфільтр об'єкта кришки, якщо потрібно\nперевірити допустиму довжину адреси для каналу і створення id",
-                "zh-cn": "最近重播的重构\n删除 对象调用init\n需要时过滤对象编号\n检查频道和 id 创建的允许地址长度"
-            }
-        },
-        "titleLang": {
-            "en": "Fenecon",
-            "de": "Fenecon",
-            "ru": "Фенекон",
-            "pt": "Fenecón",
-            "nl": "Fenecon",
-            "fr": "Fénécon",
-            "it": "Fenecon",
-            "es": "Fenecón",
-            "pl": "Fenekon",
-            "uk": "Фенекон",
-            "zh-cn": "芬内康"
-        },
-        "desc": {
-            "en": "OpenEMS connection to fenecon pv",
-            "de": "OpenEMS-Anbindung an fenecon pv",
-            "ru": "Подключение OpenEMS к Fenecon Pv",
-            "pt": "Conexão OpenEMS com fenecon pv",
-            "nl": "OpenEMS-verbinding met fenecon pv",
-            "fr": "Connexion OpenEMS à Fenecon PV",
-            "it": "Connessione OpenEMS a fenecon pv",
-            "es": "Conexión OpenEMS a fenecon pv",
-            "pl": "Połączenie OpenEMS z fenecon pv",
-            "uk": "Підключення OpenEMS до fenecon pv",
-            "zh-cn": "OpenEMS 与 fenecon pv 的连接"
-        },
-        "authors": ["Georg Schreiner <info@sg-app.de>"],
-        "keywords": ["fenecon", "openems", "FEMS", "PV inverter", "Energy storage system", "Energy management system"],
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "fenecon.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
-        "readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
-        "loglevel": "info",
-        "tier": 3,
-        "mode": "daemon",
-        "type": "energy",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "json"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=7.2.2"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=8.0.11"
-            }
-        ]
+  "common": {
+    "name": "fenecon",
+    "version": "1.0.0",
+    "news": {
+      "1.0.0": {
+        "en": "migrate the adapter sources to TypeScript, compiled output is generated into `build/`\nvalidate the configured IP address strictly as IPv4\nuse the sanitized channel and state names consistently for the object ids\nvalidate the FEMS response and drop invalid entries instead of creating nonsense states\nonly write states when the value changed, with a heartbeat to refresh the timestamps\nwrite state updates in parallel batches to lower the CPU load\ncache the existing objects at startup and only extend objects when the definition changed\nassign a specific role to every known state and log unknown channels for later additions\nadd the channels reported as unknown to the state mapping table\nsupport writing values back to FEMS through onStateChange for writable channels\nconvert the temperature values delivered in deci degrees Celsius (dC) to degrees Celsius\nextend the README with a detailed adapter description, configuration, state overview and troubleshooting",
+        "de": "Migrieren Sie die Adapterquellen zu TypeScript, kompiliert in `build/`\nBestätigen Sie die konfigurierte IP nur als IPv4\nBenutze den bereinigten Kanal und Statusnamen für die Objekt-IDs\nvalidieren Sie die FEMS-Antwort und löschen Sie Unsinn statt Unsinn\nStatus nur bei Wertänderung schreiben, mit Heartbeat zum Aktualisieren der Zeitstempel\nStapelweise Status-Updates schreiben, um die CPU zu entlasten\nObjekte beim Start zwischenspeichern und nur erweitern, wenn sich die Definition ändert\nWeist jedem Staat eine Rolle zu und logge unbekannte Kanäle für später\nDie als unbekannt gemeldeten Kanäle zur Zuordnungstabelle hinzufügen\nunterstützt Rückschreiben von Werten an FEMS über OnStateChange für Kanäle\nrechnen Sie die Temperaturwerte in Grad Celsius (dC) in Grad Celsius um\nerweitert die README-Datei um Adapterbeschreibung, Konfiguration, Status und Fehlerbehebung",
+        "ru": "перенесите исходные коды адаптера на TypeScript, скомпилированный вывод генерируется в `build/`\nпроверьте настроенный IP-адрес строго как IPv4\nпоследовательно используйте очищенные имена каналов и состояний для идентификаторов объектов\nподтвердите ответ FEMS и удалите недействительные записи вместо создания бессмысленных состояний\nзаписывайте состояния только при изменении значения с помощью пульса для обновления временных меток\nзаписывайте обновления состояния в параллельных пакетах для снижения нагрузки на процессор\nкэшируйте существующие объекты при запуске и расширяйте объекты только при изменении определения\nназначьте определенную роль каждому известному состоянию и зарегистрируйте неизвестные каналы для последующих дополнений\nдобавьте каналы, которые указаны как неизвестные, в таблицу сопоставления состояний\nподдержка записи значений обратно в FEMS через onStateChange для каналов с возможностью записи\nпреобразовать значения температуры, выраженные в дециградусах Цельсия (dC), в градусы Цельсия\nдополните README подробным описанием адаптера, настройкой, обзором состояния и устранением неполадок",
+        "pt": "migre as fontes do adaptador para o TypeScript, a saída é gerada em `build/`\nvalide o endereço IP configurado apenas como IPv4\nuse sempre os nomes de canais e estados limpos para os IDs do objeto\nvalide a resposta do FEMS e exclua entradas inválidas em vez de criar estados sem sentido\nsó grava estados quando o valor mudou, atualizando os timestamps\natualize o estado em lotes paralelos para reduzir a CPU\narmazene os objetos existentes na inicialização e só os estenda quando a definição muda\natribua uma função específica a cada estado e registre canais para futuras adições\nadicione os canais desconhecidos à tabela de estados\nsuporta a gravação de valores no FEMS via onStateChange para canais graváveis\nconverter os valores de temperatura fornecidos em deci graus Celsius (dC)\nestenda o README com uma descrição detalhada do adaptador, configuração, visão geral e solução de problemas",
+        "nl": "migreer de adapterbronnen naar TypeScript, de gecompileerde uitvoer wordt gegenereerd in `build/`\nvalideer het geconfigureerde IP-adres strikt volgens IPv4\nde gezuiverde kanaal- en staatsnamen consequent gebruiken voor de object-ID's\nvalideer het FEMS-antwoord en laat ongeldige gegevens vallen in plaats van onzinnige toestanden te creëren\nschrijf alleen wanneer de waarde is gewijzigd, met een hartslag om de tijdstempels te verversen\nstatusupdates in parallelle batches schrijven om de CPU-belasting te verlagen\nde bestaande objecten in de cache plaatsen bij het opstarten en objecten alleen uitbreiden wanneer de definitie is gewijzigd\nwijs aan elke bekende staat een specifieke rol toe en registreer onbekende kanalen voor latere toevoegingen\nvoeg de kanalen die als onbekend zijn gerapporteerd toe aan de tabel voor het in kaart brengen van de status\nondersteuning voor het terugschrijven van waarden naar FEMS via OnStateChange voor beschrijfbare kanalen\nzet de temperatuurwaarden in deci graden Celsius (dC) om in graden Celsius\nbreid de README uit met een gedetailleerde beschrijving van de adapter, configuratie, statusoverzicht en probleemoplossing",
+        "fr": "migrer les sources de l'adaptateur vers TypeScript, le résultat compilé est généré dans build/\nvalider l'adresse IP configurée uniquement en IPv4\nutiliser le canal épuré et donner le même nom aux identifiants des objets\nvalidez la réponse FEMS et supprimez les entrées invalides au lieu de créer des états absurdes\nn'écrit que les états lorsque la valeur change, en actualisant l'horodatage\nécrire des mises à jour d'état en parallèle pour alléger le CPU\nmettre en cache les objets existants au démarrage et ne les étendre que si leur définition change\nattribuez un rôle à chaque état connu et enregistrez les chaînes inconnues pour les ajouter\najouter les chaînes signalées comme inconnues au State Mapping\npermet de renvoyer des valeurs à FEMS via OnStateChange pour les chaînes inscriptibles\nconvertir les valeurs de température délivrées en déci degrés Celsius (dC) en degrés Celsius\nétendre le README avec une description détaillée de l'adaptateur, sa configuration, son état et le dépannage",
+        "it": "migra i sorgenti dell'adattatore a TypeScript, l'output è generato in `build/\nconvalidare l'indirizzo IP configurato come IPv4\nusa i nomi di canale e stato puliti in modo coerente per gli ID oggetto\nconvalida la risposta FEMS e elimina voci non valide invece di creare stati assurdi\nscriva gli stati solo quando il valore è cambiato, per aggiornare i timestamp\naggiorna lo stato in batch per ridurre il carico della CPU\nmemorizza gli oggetti esistenti all'avvio e li estende solo se la definizione è cambiata\nassegna un ruolo specifico a ogni stato noto e registra canali sconosciuti\naggiungere i canali segnalati come sconosciuti\nsupporto per riscrivere valori in FEMS tramite OnStateChange per canali scrivibili\nconvertire i valori di temperatura forniti in deci gradi Celsius (dC) in gradi Celsius\nestendere il README con una descrizione dettagliata dell'adattatore, configurazione e stato",
+        "es": "migrar las fuentes del adaptador a TypeScript, la salida compilada se genera en `build/`\nvalidar la dirección IP configurada estrictamente como IPv4\nuse los nombres de los canales y estados desinfectados de forma uniforme para los ID\nvalidar la respuesta de FEMS y eliminar las entradas no válidas en lugar de crear estados sin sentido\nsolo escribe estados cuando el valor cambia, con un latido para actualizar la hora\nescribir actualizaciones de estado en lotes para reducir la carga de la CPU\nalmacenar en caché los objetos existentes al inicio y solo ampliarlos si la definición cambia\nasignar un rol específico a cada estado conocido y registrar canales desconocidos para añadirlo\nañadir los canales declarados desconocidos a la tabla estatal\nadmite volver a escribir valores en FEMS a través de OnStateChange para canales grabables\nconvertir los valores de temperatura proporcionados en deci grados Celsius (dC) a grados Celsius\nampliar el README con una descripción detallada del adaptador, la configuración, el estado y la solución de problemas",
+        "pl": "migracja źródeł adaptera do TypeScript, skompilowane dane wyjściowe są generowane do `build/`\nsprawdź skonfigurowany adres IP ściśle jako IPv4\nkonsekwentnie używaj zdezynfekowanych nazw kanałów i stanów dla identyfikatorów obiektów\nzweryfikuj odpowiedź FEMS i upuść nieprawidłowe wpisy zamiast tworzyć stany nonsensowne\nzapisywanie stanów tylko wtedy, gdy wartość się zmieniła, z biciem serca, aby odświeżyć znaczniki czasu\npisz aktualizacje stanu w partiach równoległych, aby zmniejszyć obciążenie procesora\nbuforuje istniejące obiekty podczas uruchamiania i rozszerza obiekty tylko po zmianie definicji\nprzypisać określoną rolę do każdego znanego stanu i rejestrować nieznane kanały w celu późniejszego dodawania\ndodać kanały zgłoszone jako nieznane do tabeli mapowania stanu\nobsługa zapisu wartości z powrotem do FEMS poprzez OnStateChange dla kanałów zapisywnych\nprzeliczyć wartości temperatury dostarczane w deci stopniach Celsjusza (dC) na stopnie Celsjusza\nrozszerzyć README o szczegółowy opis adaptera, konfigurację, przegląd stanu i rozwiązywanie problemów",
+        "uk": "перенести джерела адаптера до TypeScript, компільований вихід генерується в `build/`\nперевіряйте налаштовану IP-адресу строго як IPv4\nпослідовно використовувати санітарні імена каналів і станів для ідентифікаторів об'єктів\nпідтвердити відповідь FEMS та скинути недійсні записи замість створення безглуздих станів\nзаписуйте стани лише тоді, коли значення змінилося, із серцебиттям, щоб оновити мітки часу\nзаписувати оновлення стану паралельними партіями, щоб знизити навантаження на процесор\nкешувати існуючі об'єкти під час запуску та розширювати об'єкти лише тоді, коли визначення змінилося\nпризначити певну роль кожному відомому стану та реєструвати невідомі канали для подальших доповнень\nдодати канали, про які повідомляється як невідомі, до таблиці відображення стану\nпідтримка запису значень назад до FEMS через onStateChange для записуються каналів\nперетворити температурні значення, що подаються в деці градусах Цельсія (dC), у градуси Цельсія\nрозширити README детальним описом адаптера, конфігурацією, оглядом стану та усуненням несправностей",
+        "zh-cn": "将适配器源代码迁移到 TypeScript，编译后的输出生成到 `build/`\n将配置的 IP 地址严格验证为 IPv4\n为对象 ID 一致地使用经过消毒的频道和状态名称\n验证 FEMS 响应并删除无效条目，而不是创建无效状态\n仅在值更改时写入状态，用心跳刷新时间戳\n并行批量写入状态更新以降低 CPU 负载\n在启动时缓存现有对象，仅在定义更改时扩展对象\n为每个已知状态分配特定角色并记录未知频道以供日后添加\n将报告为未知的频道添加到状态映射表中\n支持通过 onStateChange 将可写通道的值写回 FEMS\n将以十摄氏度 (dC) 为单位的温度值转换为摄氏度\n扩展自述文件，提供详细的适配器描述、配置、状态概述和故障排除"
+      },
+      "0.7.0": {
+        "en": "dependency updates\nallow multi channel configuration\noptimize Rest request and log channel not exists",
+        "de": "abhängigkeitsaktualisierung\nmultikanalkonfiguration\noptimierung Ruheanfrage und Log-Kanal nicht vorhanden",
+        "ru": "обновления зависимостей\nмногоканальная конфигурация\nоптимизировать Запрос на отдых и логарифмический канал отсутствуют",
+        "pt": "atualizações de dependência\npermitir a configuração de vários canais\notimizar O pedido de descanso e o canal de log não existem",
+        "nl": "afhankelijkheidsupdates\nmultikanaalconfiguratie toestaan\noptimaliseren Restverzoek en logkanaal bestaan niet",
+        "fr": "mises à jour des dépendances\npermettre la configuration de plusieurs canaux\noptimiser Demande de repos et canal de journal n'existe pas",
+        "it": "aggiornamenti di dipendenza\nconsentire la configurazione multi canale\nottimizzare Richiesta di riposo e canale di log non esiste",
+        "es": "actualizaciones de la dependencia\npermite configuración de varios canales\noptimización Solicitud de descanso y canal de registro no existe",
+        "pl": "aktualizacje zależności\numożliwia konfigurację wielu kanałów\noptymalizacja Żądanie odpoczynku i kanał logowania nie istnieje",
+        "uk": "оновлення залежності\nможливість багатоканальної конфігурації\nоптимізація Решта запиту та журналу не існує",
+        "zh-cn": "依赖性更新\n允许多频道配置\n优化 暂停请求和日志通道不存在"
+      },
+      "0.6.2": {
+        "en": "fix loading single channel",
+        "de": "belastbarer einkanal",
+        "ru": "загрузка один канал",
+        "pt": "corrigir o carregamento único canal",
+        "nl": "fix laden van enkel kanaal",
+        "fr": "fixer le chargement à un seul canal",
+        "it": "fix caricamento singolo canale",
+        "es": "fijar la carga de un solo canal",
+        "pl": "naprawić ładowanie pojedynczego kanału",
+        "uk": "фіксувати завантаження одного каналу",
+        "zh-cn": "固定装入单个通道"
+      },
+      "0.6.1": {
+        "en": "fix missing size attributes",
+        "de": "fehlende größenattribute beheben",
+        "ru": "исправить недостающие атрибуты",
+        "pt": "corrigir atributos de tamanho ausentes",
+        "nl": "ontbrekende grootte-attributen herstellen",
+        "fr": "correction des attributs de taille manquants",
+        "it": "correggere gli attributi delle dimensioni mancanti",
+        "es": "fijar atributos de tamaño perdido",
+        "pl": "naprawić brakujące atrybuty wielkości",
+        "uk": "виправити атрибути відсутніх розмірів",
+        "zh-cn": "修补缺失的大小属性"
+      },
+      "0.6.0": {
+        "en": "dependency updates\nadded component and channel selection\nfix warning after FEMS update and create states",
+        "de": "abhängigkeitsaktualisierung\nzusätzliche bauteil- und kanalauswahl\nfix Warnung nach FEMS-Update und Erstellung von Zuständen",
+        "ru": "обновления зависимостей\nдополнительный компонент и выбор канала\nисправить предупреждение после обновления и создания состояний",
+        "pt": "atualizações de dependência\ncomponente adicionado e seleção de canal\ncorrigir aviso após a atualização FEMS e criar estados",
+        "nl": "afhankelijkheidsupdates\ntoegevoegde component- en kanaalselectie\nfix waarschuwing na FEMS bijwerken en maken staten",
+        "fr": "mises à jour des dépendances\najout du composant et sélection des canaux\ncorriger l'avertissement après la mise à jour de FEMS et créer des états",
+        "it": "aggiornamenti di dipendenza\ncomponente aggiunto e selezione dei canali\ncorreggere l'avvertimento dopo l'aggiornamento FEMS e creare stati",
+        "es": "actualizaciones de la dependencia\ncomponente añadido y selección de canales\nfijar advertencia después de la actualización de FEMS y crear estados",
+        "pl": "aktualizacje zależności\ndodany wybór komponentów i kanałów\nnaprawić ostrzeżenie po aktualizacji FEMS i utworzyć stany",
+        "uk": "оновлення залежності\nдодано компонент і вибір каналів\nфіксувати попередження після оновлення FEMS і створити стани",
+        "zh-cn": "依赖性更新\n添加组件和频道选择\nfEMS 更新后固定警告并创建状态"
+      },
+      "0.5.0": {
+        "en": "set correct role states",
+        "de": "korrekte rollenzustände einstellen",
+        "ru": "правильность",
+        "pt": "definir estados de papel corretos",
+        "nl": "juiste rolstaten instellen",
+        "fr": "définir les états de rôle corrects",
+        "it": "impostare gli stati di ruolo corretti",
+        "es": "establecer el papel correcto",
+        "pl": "ustalenie prawidłowej roli państw",
+        "uk": "встановити правильну роль держави",
+        "zh-cn": "设定正确的角色状态"
+      },
+      "0.4.2": {
+        "en": "fix channel creation only one time on init",
+        "de": "fix kanal schöpfung nur ein mal auf init",
+        "ru": "зафиксировать создание канала только один раз",
+        "pt": "corrigir criação de canal apenas uma vez no init",
+        "nl": "fix kanaal aanmaak slechts één keer op init",
+        "fr": "fixer la création de canal une seule fois sur init",
+        "it": "correzione canale creazione solo una volta su init",
+        "es": "fijar la creación del canal sólo una vez en el init",
+        "pl": "naprawić tworzenie kanału tylko jeden raz na init",
+        "uk": "фіксувати створення каналів тільки один раз на init",
+        "zh-cn": "固定频道创建仅一次"
+      }
     },
-    "native": {
-        "ipAddress": "",
-        "refreshIntervall": 30,
-        "useCustomEndpoints": false,
-        "endpoints": [
-            {
-                "componentId": "_sum",
-                "channelId": ".*"
-            },
-            {
-                "componentId": "ess0",
-                "channelId": ".*"
-            },
-            {
-                "componentId": "charger.*",
-                "channelId": ".*"
-            },
-            {
-                "componentId": "meter0",
-                "channelId": ".*"
-            }
-        ]
+    "titleLang": {
+      "en": "Fenecon",
+      "de": "Fenecon",
+      "ru": "Фенекон",
+      "pt": "Fenecón",
+      "nl": "Fenecon",
+      "fr": "Fénécon",
+      "it": "Fenecon",
+      "es": "Fenecón",
+      "pl": "Fenekon",
+      "uk": "Фенекон",
+      "zh-cn": "芬内康"
     },
-    "objects": [],
-    "instanceObjects": []
+    "desc": {
+      "en": "OpenEMS connection to fenecon pv",
+      "de": "OpenEMS-Anbindung an fenecon pv",
+      "ru": "Подключение OpenEMS к Fenecon Pv",
+      "pt": "Conexão OpenEMS com fenecon pv",
+      "nl": "OpenEMS-verbinding met fenecon pv",
+      "fr": "Connexion OpenEMS à Fenecon PV",
+      "it": "Connessione OpenEMS a fenecon pv",
+      "es": "Conexión OpenEMS a fenecon pv",
+      "pl": "Połączenie OpenEMS z fenecon pv",
+      "uk": "Підключення OpenEMS до fenecon pv",
+      "zh-cn": "OpenEMS 与 fenecon pv 的连接"
+    },
+    "authors": [
+      "Georg Schreiner <info@sg-app.de>"
+    ],
+    "keywords": [
+      "fenecon",
+      "openems",
+      "FEMS",
+      "PV inverter",
+      "Energy storage system",
+      "Energy management system"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "fenecon.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/sg-app/ioBroker.fenecon/main/admin/fenecon.png",
+    "readme": "https://github.com/sg-app/ioBroker.fenecon/blob/main/README.md",
+    "loglevel": "info",
+    "tier": 3,
+    "mode": "daemon",
+    "type": "energy",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=7.2.2"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=8.0.11"
+      }
+    ]
+  },
+  "native": {
+    "ipAddress": "",
+    "refreshIntervall": 30,
+    "useCustomEndpoints": false,
+    "endpoints": [
+      {
+        "componentId": "_sum",
+        "channelId": ".*"
+      },
+      {
+        "componentId": "ess0",
+        "channelId": ".*"
+      },
+      {
+        "componentId": "charger.*",
+        "channelId": ".*"
+      },
+      {
+        "componentId": "meter0",
+        "channelId": ".*"
+      }
+    ]
+  },
+  "objects": [],
+  "instanceObjects": []
 }
