@@ -30,4 +30,31 @@ describe('lib/states', () => {
         const withoutRole = definitions.filter((definition: StateDefinition): boolean => !definition.role);
         expect(withoutRole).to.deep.equal([]);
     });
+
+    it('does not use the generic state role anymore', () => {
+        const generic = definitions.filter((definition: StateDefinition): boolean => definition.role === 'state');
+        expect(generic).to.deep.equal([]);
+    });
+
+    it('uses only known ioBroker roles', () => {
+        const allowedRoles = new Set([
+            'value',
+            'value.voltage',
+            'value.current',
+            'value.power',
+            'value.power.reactive',
+            'value.energy',
+            'value.frequency',
+            'value.temperature',
+            'indicator',
+            'text',
+            'time.span',
+            'time.timeout',
+            'time.interval',
+        ]);
+        const unknown = definitions.filter(
+            (definition: StateDefinition): boolean => !allowedRoles.has(definition.role),
+        );
+        expect(unknown).to.deep.equal([]);
+    });
 });

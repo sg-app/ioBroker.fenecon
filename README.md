@@ -53,6 +53,14 @@ The adapter is written in TypeScript. The sources live in `src/` and the compile
 - (SG-App) migrate the adapter sources to TypeScript, compiled output is generated into `build/`
 - (SG-App) validate the configured IP address strictly as IPv4
 - (SG-App) use the sanitized channel and state names consistently for the object ids
+- (SG-App) validate the FEMS response and drop invalid entries instead of creating nonsense states
+- (SG-App) only write states when the value changed, with a heartbeat to refresh the timestamps
+- (SG-App) write state updates in parallel batches to lower the CPU load
+- (SG-App) cache the existing objects at startup and only extend objects when the definition changed
+- (SG-App) assign a specific role to every known state and log unknown channels for later additions
+- (SG-App) add the channels reported as unknown to the state mapping table
+- (SG-App) support writing values back to FEMS through onStateChange for writable channels
+- (SG-App) convert the temperature values delivered in deci degrees Celsius (dC) to degrees Celsius
 
 ### 0.7.0 (2025-09-28)
 

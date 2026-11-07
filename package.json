@@ -70,6 +70,8 @@
     "test:integration": "mocha test/integration --exit",
     "check": "tsc --noEmit",
     "lint": "eslint -c eslint.config.mjs .",
+    "generate:states": "node tools/generate-states.js src/states.ts && prettier --write src/states.ts",
+    "benchmark": "node tools/benchmark.js",
     "translate": "translate-adapter",
     "release": "release-script",
     "release-patch": "release-script patch --yes",

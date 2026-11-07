@@ -5,6 +5,32 @@
  */
 export type FemsValueType = 'INTEGER' | 'LONG' | 'DOUBLE' | 'FLOAT' | 'BOOLEAN' | 'STRING';
 
+/** All value types known from the FEMS REST API, used for runtime validation. */
+export const FEMS_VALUE_TYPES: readonly FemsValueType[] = ['INTEGER', 'LONG', 'DOUBLE', 'FLOAT', 'BOOLEAN', 'STRING'];
+
+/** All access modes known from the FEMS REST API, used for runtime validation. */
+export const FEMS_ACCESS_MODES: readonly FemsAccessMode[] = ['RO', 'RW', 'WO'];
+
+/**
+ * Checks whether a value is a known FEMS value type.
+ *
+ * @param value - Value to check
+ * @returns `true` if the value is a valid FEMS value type
+ */
+export function isFemsValueType(value: unknown): value is FemsValueType {
+    return typeof value === 'string' && (FEMS_VALUE_TYPES as readonly string[]).includes(value);
+}
+
+/**
+ * Checks whether a value is a known FEMS access mode.
+ *
+ * @param value - Value to check
+ * @returns `true` if the value is a valid FEMS access mode
+ */
+export function isFemsAccessMode(value: unknown): value is FemsAccessMode {
+    return typeof value === 'string' && (FEMS_ACCESS_MODES as readonly string[]).includes(value);
+}
+
 /**
  * Access mode as delivered by the FEMS REST API.
  */

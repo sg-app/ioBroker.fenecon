@@ -4,10 +4,16 @@ import type { FemsChannel } from './types';
 import {
     buildChannelObject,
     buildStateObject,
+    convertToFemsValue,
+    convertValue,
+    isWritable,
     name2id,
     resolveRole,
+    resolveRoleWithSource,
     toBooleanValue,
     typeTranslation,
+    unitScaleFactor,
+    unitToRole,
 } from './state-factory';
 
 /**
@@ -72,6 +78,71 @@ describe('lib/state-factory', () => {
         });
     });
 
+    describe('resolveRoleWithSource', () => {
+        it('reports known addresses as known', () => {
+            expect(resolveRoleWithSource('_sum/GridActivePower', 'W')).to.deep.equal({
+                role: 'value.power',
+                known: true,
+            });
+        });
+
+        it('derives the role from the unit for unknown addresses', () => {
+            expect(resolveRoleWithSource('charger12/Voltage', 'V')).to.deep.equal({
+                role: 'value.voltage',
+                known: false,
+            });
+            expect(resolveRoleWithSource('charger12/Unknown', '')).to.deep.equal({ role: 'value', known: false });
+        });
+    });
+
+    describe('unitToRole', () => {
+        it('maps known units to roles', () => {
+            expect(unitToRole('V')).to.equal('value.voltage');
+            expect(unitToRole('A')).to.equal('value.current');
+            expect(unitToRole('W')).to.equal('value.power');
+            expect(unitToRole('kWh')).to.equal('value.energy');
+            expect(unitToRole('Hz')).to.equal('value.frequency');
+            expect(unitToRole('dC')).to.equal('value.temperature');
+        });
+
+        it('falls back to value for unknown units', () => {
+            expect(unitToRole('')).to.equal('value');
+            expect(unitToRole('bananas')).to.equal('value');
+        });
+    });
+
+    describe('convertValue', () => {
+        it('converts deci degrees to degrees', () => {
+            expect(unitScaleFactor('dC')).to.equal(0.1);
+            expect(convertValue(253, 'dC')).to.equal(25.3);
+        });
+
+        it('keeps values with other units untouched', () => {
+            expect(unitScaleFactor('V')).to.equal(1);
+            expect(convertValue(230, 'V')).to.equal(230);
+            expect(convertValue('text', 'V')).to.equal('text');
+        });
+    });
+
+    describe('convertToFemsValue', () => {
+        it('converts degrees back to deci degrees', () => {
+            expect(convertToFemsValue(25.3, 'dC')).to.equal(253);
+        });
+
+        it('keeps values with other units untouched', () => {
+            expect(convertToFemsValue(230, 'V')).to.equal(230);
+            expect(convertToFemsValue(true, 'V')).to.equal(true);
+        });
+    });
+
+    describe('isWritable', () => {
+        it('reports RW and WO as writable', () => {
+            expect(isWritable('RW')).to.be.true;
+            expect(isWritable('WO')).to.be.true;
+            expect(isWritable('RO')).to.be.false;
+        });
+    });
+
     describe('buildChannelObject', () => {
         it('builds a channel object', () => {
             const channelObject = buildChannelObject('_sum');
@@ -94,14 +165,15 @@ describe('lib/state-factory', () => {
             expect(stateObject.common.write).to.be.false;
         });
 
-        it('enables write for RW channels only', () => {
+        it('enables write for RW and WO channels only', () => {
             expect(buildStateObject('id', makeChannel({ accessMode: 'RW' })).common.write).to.be.true;
+            expect(buildStateObject('id', makeChannel({ accessMode: 'WO' })).common.write).to.be.true;
             expect(buildStateObject('id', makeChannel({ accessMode: 'RO' })).common.write).to.be.false;
         });
 
-        it('falls back to the state role for unknown addresses', () => {
+        it('derives the role from the unit for unknown addresses', () => {
             const stateObject = buildStateObject('id', makeChannel({ address: 'unknown/address' }));
-            expect(stateObject.common.role).to.equal('state');
+            expect(stateObject.common.role).to.equal('value.power');
         });
     });
 

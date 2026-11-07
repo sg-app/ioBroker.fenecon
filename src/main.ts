@@ -1,21 +1,42 @@
-/*
- * Created with @iobroker/create-adapter v2.6.3
- */
-
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 import * as utils from '@iobroker/adapter-core';
 import { isIPv4 } from 'node:net';
 import { calculateAutarchy, calculateSelfConsumption } from './calculations';
-import { FemsClient, type Logger } from './fems-client';
-import { buildChannelObject, buildStateObject, name2id, toBooleanValue, typeTranslation } from './state-factory';
+import { FemsClient, type LogMessage, type Logger } from './fems-client';
+import {
+    buildChannelObject,
+    buildStateObject,
+    convertToFemsValue,
+    convertValue,
+    isWritable,
+    name2id,
+    resolveRoleWithSource,
+    toBooleanValue,
+    typeTranslation,
+} from './state-factory';
 import type { FemsChannel } from './types';
+
+/** States which did not change are rewritten at least once within this interval. */
+const HEARTBEAT_INTERVAL_MS = 10 * 60 * 1000;
+/** Number of state writes which are dispatched in parallel. */
+const WRITE_BATCH_SIZE = 50;
 
 class Fenecon extends utils.Adapter {
     /** Channels which were already created in the object tree. */
     private readonly createdChannels: Set<string> = new Set<string>();
-    /** States which were already created in the object tree. */
-    private readonly createdStates: Set<string> = new Set<string>();
+    /** Signature of the state object which is currently stored for a state id. */
+    private readonly stateSignatures: Map<string, string> = new Map<string, string>();
+    /** Last written value per state id, used to skip unchanged values. */
+    private readonly valueCache: Map<string, ioBroker.StateValue> = new Map<string, ioBroker.StateValue>();
+    /** Unknown FEMS addresses which were already reported in the log. */
+    private readonly reportedUnknown: Set<string> = new Set<string>();
+    /** Last known FEMS channel per state id, used to write values back. */
+    private readonly stateChannels: Map<string, FemsChannel> = new Map<string, FemsChannel>();
+    /** Writable states which are already subscribed. */
+    private readonly subscribedStates: Set<string> = new Set<string>();
+    /** Timestamp of the last full write cycle. */
+    private lastFullWrite = 0;
     /** REST client for the FEMS box. */
     private client: FemsClient | null = null;
     /** Timer of the next scheduled update. */
@@ -33,6 +54,7 @@ class Fenecon extends utils.Adapter {
         });
 
         this.on('ready', this.onReady.bind(this));
+        this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
@@ -61,6 +83,8 @@ class Fenecon extends utils.Adapter {
             }
 
             this.log.debug('[onReady] Adapter successful started.');
+            await this.loadExistingObjects();
+
             this.client = new FemsClient({
                 ipAddress: this.config.ipAddress,
                 endpoints: this.config.useCustomEndpoints ? this.config.endpoints : [],
@@ -74,27 +98,84 @@ class Fenecon extends utils.Adapter {
     }
 
     /**
+     * Loads all existing objects of this adapter once at startup.
+     *
+     * This avoids per state `getObject` calls and allows the adapter to detect
+     * which objects are already present and which definition changed.
+     */
+    private async loadExistingObjects(): Promise<void> {
+        const objects = await this.getAdapterObjectsAsync();
+        const prefix = `${this.namespace}.`;
+
+        for (const [id, object] of Object.entries(objects)) {
+            const localId = id.startsWith(prefix) ? id.slice(prefix.length) : id;
+
+            if (object.type === 'channel') {
+                this.createdChannels.add(localId);
+            } else if (object.type === 'state') {
+                this.stateSignatures.set(localId, this.stateSignature(object));
+            }
+        }
+
+        this.log.debug(
+            `[loadExistingObjects] Found ${this.createdChannels.size} channels and ${this.stateSignatures.size} states.`,
+        );
+    }
+
+    /**
+     * Builds a comparable signature of the state properties the adapter manages.
+     *
+     * @param object - State object, either from the object tree or newly built
+     * @returns A string which changes whenever a managed property changes
+     */
+    private stateSignature(object: Pick<ioBroker.StateObject, 'common'>): string {
+        const common = object.common;
+        return JSON.stringify([
+            common.name,
+            common.desc,
+            common.role,
+            common.type,
+            common.unit,
+            common.read,
+            common.write,
+        ]);
+    }
+
+    /**
      * Creates the logger the REST client writes to.
      *
      * @returns Logger bound to this adapter instance
      */
     private createLogger(): Logger {
         return {
-            debug: (message: string): void => this.log.debug(message),
-            silly: (message: string): void => this.log.silly(message),
-            error: (message: string): void => this.log.error(message),
+            debug: (message: LogMessage): void => this.log.debug(this.resolveMessage(message)),
+            silly: (message: LogMessage): void => {
+                if (this.log.level === 'silly') {
+                    this.log.silly(this.resolveMessage(message));
+                }
+            },
+            error: (message: LogMessage): void => this.log.error(this.resolveMessage(message)),
         };
     }
 
     /**
-     * Reads a state value and coerces it to a number.
+     * Resolves a possibly lazy log message.
+     *
+     * @param message - Message or factory
+     * @returns The resolved message string
+     */
+    private resolveMessage(message: LogMessage): string {
+        return typeof message === 'function' ? message() : message;
+    }
+
+    /**
+     * Reads a cached state value and coerces it to a number.
      *
      * @param id - Id of the state
      * @returns The numeric value or `null` if the state is missing or not numeric
      */
-    private async getNumericStateValue(id: string): Promise<number | null> {
-        const state = await this.getStateAsync(id);
-        const value = state?.val;
+    private getCachedNumber(id: string): number | null {
+        const value = this.valueCache.get(id);
         if (typeof value === 'number' && Number.isFinite(value)) {
             return value;
         }
@@ -156,30 +237,78 @@ class Fenecon extends utils.Adapter {
     /**
      * Updates the states for all channels delivered by FEMS.
      *
+     * Only changed values are written. Unchanged values are refreshed once per
+     * heartbeat, so that the timestamps do not become stale.
+     *
      * @param channels - Channels delivered by the FEMS REST API
      */
     private async createUpdateState(channels: FemsChannel[]): Promise<void> {
-        try {
-            for (const channel of channels) {
-                const [rawChannelName, rawStateName] = channel.address.split('/');
-                if (!rawChannelName || !rawStateName) {
+        if (Date.now() - this.lastFullWrite >= HEARTBEAT_INTERVAL_MS) {
+            this.valueCache.clear();
+            this.lastFullWrite = Date.now();
+        }
+
+        const pending: { id: string; val: ioBroker.StateValue }[] = [];
+        let skipped = 0;
+
+        for (const channel of channels) {
+            try {
+                const parts = channel.address.split('/');
+                if (parts.length !== 2 || !parts[0] || !parts[1]) {
                     continue;
                 }
 
-                const channelName = name2id(rawChannelName, this.FORBIDDEN_CHARS);
-                const stateName = name2id(rawStateName, this.FORBIDDEN_CHARS);
+                const channelName = name2id(parts[0], this.FORBIDDEN_CHARS);
+                const stateName = name2id(parts[1], this.FORBIDDEN_CHARS);
                 const type = typeTranslation(channel.type);
-                const value = type === 'boolean' ? toBooleanValue(channel.value) : channel.value;
+                const value =
+                    type === 'boolean' ? toBooleanValue(channel.value) : convertValue(channel.value, channel.unit);
                 const id = `${channelName}.${stateName}`;
 
-                await this.createFolderObject(channelName);
+                await this.createChannelObject(channelName);
                 await this.createStateObject(id, channel, stateName);
 
-                this.log.debug(`[createUpdateState] StateId ${id} setState.`);
-                await this.setState(id, { val: value, ack: true });
+                if (this.shouldWrite(id, value)) {
+                    pending.push({ id, val: value });
+                } else {
+                    skipped += 1;
+                }
+            } catch (error) {
+                this.log.error(`[createUpdateState] Skipping ${channel.address}: ${this.getErrorMessage(error)}`);
             }
-        } catch (error) {
-            this.log.error(`[createUpdateState] Exception. ${this.getErrorMessage(error)}`);
+        }
+
+        await this.writeStates(pending);
+        this.log.debug(
+            `[createUpdateState] ${channels.length} channels, ${pending.length} written, ${skipped} unchanged.`,
+        );
+    }
+
+    /**
+     * Checks whether a value must be written to the state.
+     *
+     * @param id - Id of the state
+     * @param value - New value
+     * @returns `true` if the value differs from the last written one
+     */
+    private shouldWrite(id: string, value: ioBroker.StateValue): boolean {
+        if (this.valueCache.get(id) === value) {
+            return false;
+        }
+
+        this.valueCache.set(id, value);
+        return true;
+    }
+
+    /**
+     * Writes all pending state values in parallel batches.
+     *
+     * @param pending - States which must be written
+     */
+    private async writeStates(pending: { id: string; val: ioBroker.StateValue }[]): Promise<void> {
+        for (let index = 0; index < pending.length; index += WRITE_BATCH_SIZE) {
+            const batch = pending.slice(index, index + WRITE_BATCH_SIZE);
+            await Promise.all(batch.map(({ id, val }) => this.setState(id, { val, ack: true })));
         }
     }
 
@@ -188,31 +317,114 @@ class Fenecon extends utils.Adapter {
      *
      * @param channelName - Sanitized channel name
      */
-    private async createFolderObject(channelName: string): Promise<void> {
+    private async createChannelObject(channelName: string): Promise<void> {
         if (this.createdChannels.has(channelName)) {
             return;
         }
 
-        this.log.debug(`[createFolderObject] Channel ${channelName} not exists. Extend Object.`);
         await this.extendObject(channelName, buildChannelObject(channelName));
         this.createdChannels.add(channelName);
     }
 
     /**
-     * Creates the state object if it does not exist yet.
+     * Creates or updates the state object when its definition changed.
      *
      * @param id - Id of the state
      * @param channel - Channel delivered by the FEMS REST API
      * @param stateName - Sanitized state name
      */
     private async createStateObject(id: string, channel: FemsChannel, stateName: string): Promise<void> {
-        if (this.createdStates.has(id)) {
+        // Remember the channel so that a value can be written back later.
+        this.stateChannels.set(id, channel);
+        if (isWritable(channel.accessMode)) {
+            this.subscribeWritableState(id);
+        }
+
+        const stateObject = buildStateObject(stateName, channel);
+        const signature = this.stateSignature(stateObject);
+        if (this.stateSignatures.get(id) === signature) {
             return;
         }
 
-        this.log.debug(`[createStateObject] StateId ${id} not exists. Extend state.`);
-        await this.extendObject(id, buildStateObject(stateName, channel));
-        this.createdStates.add(id);
+        const { role, known } = resolveRoleWithSource(channel.address, channel.unit);
+        if (!known) {
+            this.reportUnknownAddress(channel, role);
+        }
+
+        await this.extendObject(id, stateObject);
+        this.stateSignatures.set(id, signature);
+    }
+
+    /**
+     * Subscribes a writable state so that user commands reach {@link onStateChange}.
+     *
+     * @param id - Id of the state
+     */
+    private subscribeWritableState(id: string): void {
+        if (this.subscribedStates.has(id)) {
+            return;
+        }
+
+        this.subscribeStates(id);
+        this.subscribedStates.add(id);
+    }
+
+    /**
+     * Is called when a state which the adapter subscribed to changed.
+     *
+     * Values written by the user (ack is not set) are forwarded to FEMS.
+     *
+     * @param id - Full id of the changed state
+     * @param state - New state value
+     */
+    private async onStateChange(id: string, state: ioBroker.State | null | undefined): Promise<void> {
+        if (!state || state.ack) {
+            return;
+        }
+
+        const prefix = `${this.namespace}.`;
+        const localId = id.startsWith(prefix) ? id.slice(prefix.length) : id;
+        const channel = this.stateChannels.get(localId);
+        if (!channel) {
+            this.log.warn(`[onStateChange] No channel information for ${id}.`);
+            return;
+        }
+
+        if (!isWritable(channel.accessMode)) {
+            this.log.warn(`[onStateChange] Channel ${channel.address} is not writable.`);
+            return;
+        }
+
+        if (!this.client) {
+            this.log.warn(`[onStateChange] No client available to write ${channel.address}.`);
+            return;
+        }
+
+        const value = convertToFemsValue(state.val, channel.unit);
+        const success = await this.client.writeChannel(channel.address, value);
+        if (success) {
+            await this.setState(localId, { val: state.val, ack: true });
+        } else {
+            this.log.error(`[onStateChange] Could not write ${channel.address} = ${JSON.stringify(state.val)}.`);
+        }
+    }
+
+    /**
+     * Reports an unknown FEMS address once, so it can be added to the mapping table.
+     *
+     * @param channel - Channel delivered by the FEMS REST API
+     * @param role - Role which was derived as fallback
+     */
+    private reportUnknownAddress(channel: FemsChannel, role: string): void {
+        if (this.reportedUnknown.has(channel.address)) {
+            return;
+        }
+
+        this.reportedUnknown.add(channel.address);
+        this.log.info(
+            `[createStateObject] Unknown channel ${channel.address} (type ${channel.type}, accessMode ${channel.accessMode}, unit '${channel.unit}') - ` +
+                `derived role '${role}'. Please report it so it can be added to the mapping table.`,
+        );
     }
 
     /**
@@ -238,22 +450,23 @@ class Fenecon extends utils.Adapter {
      */
     private async calculateAutarchy(): Promise<void> {
         const id = '_sum.Autarchy';
-        if (!this.createdStates.has('_sum.GridActivePower') || !this.createdStates.has('_sum.ConsumptionActivePower')) {
+        if (!this.valueCache.has('_sum.GridActivePower') || !this.valueCache.has('_sum.ConsumptionActivePower')) {
             return;
         }
 
-        const [gridActivePower, consumptionActivePower] = await Promise.all([
-            this.getNumericStateValue('_sum.GridActivePower'),
-            this.getNumericStateValue('_sum.ConsumptionActivePower'),
-        ]);
-
-        const autarchy = calculateAutarchy(gridActivePower, consumptionActivePower);
+        const autarchy = calculateAutarchy(
+            this.getCachedNumber('_sum.GridActivePower'),
+            this.getCachedNumber('_sum.ConsumptionActivePower'),
+        );
         if (autarchy === null) {
             return;
         }
 
+        await this.createChannelObject('_sum');
         await this.createStateObject(id, this.toSummaryChannel('_sum/Autarchy', 'Autarchy'), 'Autarchy');
-        await this.setState(id, { val: autarchy, ack: true });
+        if (this.shouldWrite(id, autarchy)) {
+            await this.setState(id, { val: autarchy, ack: true });
+        }
     }
 
     /**
@@ -261,26 +474,27 @@ class Fenecon extends utils.Adapter {
      */
     private async calculateSelfConsumption(): Promise<void> {
         const id = '_sum.SelfConsumption';
-        if (!this.createdStates.has('_sum.GridActivePower') || !this.createdStates.has('_sum.ProductionActivePower')) {
+        if (!this.valueCache.has('_sum.GridActivePower') || !this.valueCache.has('_sum.ProductionActivePower')) {
             return;
         }
 
-        const [gridActivePower, productionActivePower] = await Promise.all([
-            this.getNumericStateValue('_sum.GridActivePower'),
-            this.getNumericStateValue('_sum.ProductionActivePower'),
-        ]);
-
-        const selfConsumption = calculateSelfConsumption(gridActivePower, productionActivePower);
+        const selfConsumption = calculateSelfConsumption(
+            this.getCachedNumber('_sum.GridActivePower'),
+            this.getCachedNumber('_sum.ProductionActivePower'),
+        );
         if (selfConsumption === null) {
             return;
         }
 
+        await this.createChannelObject('_sum');
         await this.createStateObject(
             id,
             this.toSummaryChannel('_sum/SelfConsumption', 'SelfConsumption'),
             'SelfConsumption',
         );
-        await this.setState(id, { val: selfConsumption, ack: true });
+        if (this.shouldWrite(id, selfConsumption)) {
+            await this.setState(id, { val: selfConsumption, ack: true });
+        }
     }
 
     /**
@@ -294,8 +508,6 @@ class Fenecon extends utils.Adapter {
         return { address, type: 'INTEGER', text, accessMode: 'RO', unit: '%', value: 0 };
     }
 }
-
-export { Fenecon };
 
 if (require.main !== module) {
     // Export the constructor in compact mode

@@ -1,4 +1,4 @@
-import type { FemsChannel, StateDefinition } from './types';
+import type { FemsAccessMode, FemsChannel, StateDefinition } from './types';
 import { statesByAddress } from './states';
 
 /**
@@ -46,6 +46,108 @@ export function resolveRole(address: string): string {
 }
 
 /**
+ * Resolves the ioBroker role for a FEMS address and reports its source.
+ *
+ * Known addresses use the role of the mapping table. Unknown addresses fall
+ * back to a role derived from the unit, so that the adapter does not have to
+ * fall back to the generic `state` role for every new channel.
+ *
+ * @param address - Full FEMS address, e.g. `_sum/GridActivePower`
+ * @param unit - Unit of the channel, used as fallback
+ * @returns The role and whether it was derived from the mapping table
+ */
+export function resolveRoleWithSource(address: string, unit: string): { role: string; known: boolean } {
+    const definition: StateDefinition | undefined = statesByAddress.get(address);
+    if (definition) {
+        return { role: definition.role, known: true };
+    }
+
+    return { role: unitToRole(unit), known: false };
+}
+
+/**
+ * Derives an ioBroker role from a FEMS unit as a last resort.
+ *
+ * @param unit - Unit of the channel
+ * @returns A role matching the unit or `value` if the unit is unknown
+ */
+export function unitToRole(unit: string): string {
+    const unitRoles: Record<string, string> = {
+        V: 'value.voltage',
+        mV: 'value.voltage',
+        A: 'value.current',
+        mA: 'value.current',
+        W: 'value.power',
+        VA: 'value.power',
+        var: 'value.power.reactive',
+        Wh: 'value.energy',
+        Wh_Σ: 'value.energy',
+        kWh: 'value.energy',
+        '€/MWh': 'value',
+        Hz: 'value.frequency',
+        mHz: 'value.frequency',
+        '°C': 'value.temperature',
+        dC: 'value.temperature',
+        C: 'value.temperature',
+        ms: 'time.span',
+        s: 'time.span',
+        sec: 'time.span',
+        sec_Σ: 'time.span',
+        '%': 'value',
+        '‰': 'value',
+    };
+
+    return unitRoles[unit] ?? 'value';
+}
+
+/**
+ * Returns the factor a FEMS value must be multiplied with to match the
+ * ioBroker unit conventions. Most units are delivered in the expected scale.
+ *
+ * @param unit - Unit of the channel
+ * @returns The conversion factor, `1` if no conversion is needed
+ */
+export function unitScaleFactor(unit: string): number {
+    // FEMS delivers temperatures in deci degrees Celsius (dC)
+    return unit === 'dC' ? 0.1 : 1;
+}
+
+/**
+ * Converts a raw FEMS value into the ioBroker unit scale.
+ *
+ * @param value - Raw value delivered by the FEMS API
+ * @param unit - Unit of the channel
+ * @returns The converted value
+ */
+export function convertValue(value: ioBroker.StateValue, unit: string): ioBroker.StateValue {
+    const factor = unitScaleFactor(unit);
+    if (factor === 1 || typeof value !== 'number') {
+        return value;
+    }
+
+    return value * factor;
+}
+
+/**
+ * Converts an ioBroker value back into the scale expected by the FEMS API.
+ *
+ * This is the inverse of {@link convertValue} and is used when a value is
+ * written back to FEMS.
+ *
+ * @param value - Value coming from an ioBroker state
+ * @param unit - Unit of the channel
+ * @returns The value in the FEMS scale
+ */
+export function convertToFemsValue(value: ioBroker.StateValue, unit: string): ioBroker.StateValue {
+    const factor = unitScaleFactor(unit);
+    if (factor === 1 || typeof value !== 'number') {
+        return value;
+    }
+
+    return value / factor;
+}
+
+/**
  * Builds the ioBroker channel object for a FEMS component.
  *
  * @param channelName - Sanitized channel name
@@ -80,7 +182,8 @@ export function buildStateObject(
         common: {
             name: stateName,
             desc: channel.text,
-            role: resolveRole(channel.address),
+            role: resolveRoleWithSource(channel.address, channel.unit).role,
+            // Only RW and WO channels may be written back to FEMS.
             write: channel.accessMode === 'RW' || channel.accessMode === 'WO',
             read: channel.accessMode === 'RO' || channel.accessMode === 'RW',
             type: typeTranslation(channel.type),
@@ -88,6 +191,16 @@ export function buildStateObject(
         },
         native: {},
     };
+}
+
+/**
+ * Checks whether a FEMS access mode allows writing a value.
+ *
+ * @param accessMode - Access mode delivered by the FEMS API
+ * @returns `true` if the channel can be written
+ */
+export function isWritable(accessMode: FemsAccessMode): boolean {
+    return accessMode === 'RW' || accessMode === 'WO';
 }
 
 /**
